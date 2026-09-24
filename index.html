@@ -24,25 +24,20 @@
     --accent: #ff9fbd;
 }
 
-html {
-    width: 100%;
-    height: 100%;
-    background: var(--bg);
-    color-scheme: dark;
-    overflow: hidden;
-}
-
+html,
 body {
     width: 100%;
     height: 100%;
-    min-height: 100%;
     overflow: hidden;
+    background: var(--bg);
+    color-scheme: dark;
+}
 
+body {
     background:
         radial-gradient(circle at 15% 15%, rgba(255,159,189,.08), transparent 28%),
         radial-gradient(circle at 85% 80%, rgba(255,159,189,.055), transparent 30%),
         linear-gradient(145deg, #07080a, #0b0d10 50%, #08090b);
-
     color: var(--text);
     font-family: "Red Hat Display", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -277,7 +272,7 @@ a {
 
 .intro-petals,
 .petal-layer {
-    position: fixed;
+    position: absolute;
     inset: 0;
 
     overflow: hidden;
@@ -363,10 +358,10 @@ a {
     background:
         linear-gradient(
             to bottom,
-            rgba(69,71,77,.48) 0%,
-            rgba(47,49,54,.48) 32%,
-            rgba(25,27,31,.68) 65%,
-            rgba(8,9,11,.94) 100%
+            rgba(58,61,67,.56) 0%,
+            rgba(43,45,50,.54) 32%,
+            rgba(24,26,30,.72) 65%,
+            rgba(6,7,9,.96) 100%
         );
 
     border: none;
@@ -382,8 +377,8 @@ a {
         saturate(140%);
 
     box-shadow:
-        0 18px 55px rgba(0,0,0,.42),
-        inset 0 1px rgba(255,255,255,.025);
+        0 18px 55px rgba(0,0,0,.3),
+        inset 0 1px rgba(255,255,255,.035);
 
     animation:
         headerIn
@@ -479,13 +474,8 @@ a {
     overflow: hidden;
 }
 
-/* =========================
-   VIEWS
-========================= */
-
 .view {
     width: 100%;
-    min-height: 100%;
 
     padding:
         calc(105px + env(safe-area-inset-top))
@@ -510,21 +500,17 @@ a {
 
     overflow: hidden;
 
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-
-    transform: translateX(0);
-
     transition:
         opacity .55s ease,
         transform .55s cubic-bezier(.2,.8,.2,1),
-        visibility 0s;
+        visibility .55s ease;
 }
 
 #home-view.hidden-view {
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 
     transform:
@@ -550,7 +536,9 @@ a {
     overscroll-behavior: contain;
 
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 
     transform: translateX(55px);
@@ -563,7 +551,9 @@ a {
 
 #tos-view.active {
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
 
     transform: translateX(0);
@@ -736,6 +726,11 @@ a {
 
 .beta-card button:active {
     transform: scale(.97);
+}
+
+.beta-card button:disabled {
+    opacity: .6;
+    cursor: wait;
 }
 
 .beta-status {
@@ -1124,9 +1119,6 @@ a {
 
         transition-duration:
             .01ms !important;
-
-        scroll-behavior:
-            auto !important;
     }
 }
 </style>
@@ -1134,59 +1126,35 @@ a {
 
 <body>
 
-<!-- =========================
-     INTRO
-========================= -->
-
-<div
-    id="sakura-intro"
-    class="sakura-intro"
->
-
+<!-- INTRO -->
+<div id="sakura-intro" class="sakura-intro">
     <div class="intro-grid"></div>
 
-    <div
-        class="intro-petals"
-        id="intro-petals"
-    ></div>
+    <div class="intro-petals" id="intro-petals"></div>
 
     <div class="intro-content">
-
         <div class="intro-wordmark">
             Sakura
         </div>
 
         <div class="intro-subtitle">
-
-            <span
-                class="intro-status"
-                id="intro-status"
-            >
+            <span class="intro-status" id="intro-status">
                 Connecting...
             </span>
-
         </div>
 
         <div class="intro-loader">
-
             <div class="intro-progress"></div>
-
         </div>
 
         <div class="intro-hint">
             Preparing your space
         </div>
-
     </div>
-
 </div>
 
-<!-- =========================
-     HEADER
-========================= -->
-
+<!-- HEADER -->
 <header class="site-header">
-
     <div class="header-inner">
 
         <button
@@ -1198,11 +1166,7 @@ a {
         </button>
 
         <nav class="nav">
-
-            <button
-                class="nav-button"
-                id="tos-button"
-            >
+            <button class="nav-button" id="tos-button">
                 TOS
             </button>
 
@@ -1213,34 +1177,19 @@ a {
             <button class="nav-button primary">
                 Register
             </button>
-
         </nav>
 
     </div>
-
 </header>
 
-<!-- =========================
-     PETALS
-========================= -->
+<!-- PETALS -->
+<div class="petal-layer" id="petals"></div>
 
-<div
-    class="petal-layer"
-    id="petals"
-></div>
-
-<!-- =========================
-     PAGE
-========================= -->
-
+<!-- PAGE -->
 <main class="page-container">
 
     <!-- HOME -->
-
-    <section
-        id="home-view"
-        class="view"
-    >
+    <section id="home-view" class="view">
 
         <div class="home-content">
 
@@ -1258,10 +1207,7 @@ a {
                 noise, and endless engagement tricks.
             </p>
 
-            <form
-                class="beta-card"
-                id="beta-form"
-            >
+            <form class="beta-card" id="beta-form">
 
                 <input
                     id="beta-email"
@@ -1277,25 +1223,12 @@ a {
 
             </form>
 
-            <div
-                class="beta-status"
-                id="beta-status"
-            ></div>
+            <div class="beta-status" id="beta-status"></div>
 
             <div class="feature-row">
-
-                <div class="feature">
-                    Privacy-focused
-                </div>
-
-                <div class="feature">
-                    No unnecessary tracking
-                </div>
-
-                <div class="feature">
-                    Built with people
-                </div>
-
+                <div class="feature">Privacy-focused</div>
+                <div class="feature">No unnecessary tracking</div>
+                <div class="feature">Built with people</div>
             </div>
 
         </div>
@@ -1303,21 +1236,13 @@ a {
     </section>
 
     <!-- TOS -->
-
-    <section
-        id="tos-view"
-        class="view"
-        aria-hidden="true"
-    >
+    <section id="tos-view" class="view" aria-hidden="true">
 
         <div class="tos-shell">
 
             <div class="tos-top">
 
-                <button
-                    class="tos-back"
-                    id="tos-back"
-                >
+                <button class="tos-back" id="tos-back">
                     ← Back to Sakura
                 </button>
 
@@ -1341,7 +1266,6 @@ a {
 
                 <section class="tos-section">
                     <h2>1. Acceptance of the Terms</h2>
-
                     <p>
                         By accessing or using Sakura, you agree to these Terms
                         of Service and any policies referenced by them. If you
@@ -1351,7 +1275,6 @@ a {
 
                 <section class="tos-section">
                     <h2>2. Eligibility</h2>
-
                     <p>
                         You must be at least 13 years old, or the minimum age
                         required to independently consent to digital services
@@ -1368,7 +1291,6 @@ a {
 
                 <section class="tos-section">
                     <h2>3. Your Account</h2>
-
                     <p>
                         You are responsible for keeping your account credentials
                         secure and for activity performed through your account.
@@ -1380,10 +1302,7 @@ a {
 
                 <section class="tos-section">
                     <h2>4. Prohibited Conduct</h2>
-
-                    <p>
-                        You may not use Sakura to:
-                    </p>
+                    <p>You may not use Sakura to:</p>
 
                     <ul>
                         <li>Harass, threaten, or intentionally intimidate others.</li>
@@ -1398,7 +1317,6 @@ a {
 
                 <section class="tos-section">
                     <h2>5. Content</h2>
-
                     <p>
                         You retain ownership of content you create and upload.
                         By posting content to Sakura, you grant Sakura the
@@ -1415,7 +1333,6 @@ a {
 
                 <section class="tos-section">
                     <h2>6. Message Privacy</h2>
-
                     <p>
                         Sakura is designed so that private messages and normal
                         conversations are not routinely reviewed by Sakura
@@ -1437,7 +1354,6 @@ a {
 
                 <section class="tos-section">
                     <h2>7. Voice and Video Calls</h2>
-
                     <p>
                         Sakura does not intentionally record or permanently
                         store private voice or video calls for routine
@@ -1453,7 +1369,6 @@ a {
 
                 <section class="tos-section">
                     <h2>8. Reports</h2>
-
                     <p>
                         Users may report content or accounts that they believe
                         violate these terms. Reports should be made honestly
@@ -1468,7 +1383,6 @@ a {
 
                 <section class="tos-section">
                     <h2>9. Moderation</h2>
-
                     <p>
                         Sakura may restrict, remove, suspend, or terminate
                         accounts or content when reasonably necessary to
@@ -1479,7 +1393,6 @@ a {
 
                 <section class="tos-section">
                     <h2>10. Age Enforcement</h2>
-
                     <p>
                         If Sakura reasonably determines that an account belongs
                         to someone below the minimum required age, the account
@@ -1495,7 +1408,6 @@ a {
 
                 <section class="tos-section">
                     <h2>11. Privacy</h2>
-
                     <p>
                         Sakura aims to collect only information reasonably
                         necessary to operate, secure, improve, and support the
@@ -1510,7 +1422,6 @@ a {
 
                 <section class="tos-section">
                     <h2>12. Security</h2>
-
                     <p>
                         You must not attempt to bypass authentication,
                         compromise infrastructure, access another user's
@@ -1520,7 +1431,6 @@ a {
 
                 <section class="tos-section">
                     <h2>13. Third-Party Services</h2>
-
                     <p>
                         Sakura may rely on third-party infrastructure and
                         services to provide functionality such as
@@ -1531,7 +1441,6 @@ a {
 
                 <section class="tos-section">
                     <h2>14. Availability</h2>
-
                     <p>
                         Sakura may experience downtime, maintenance,
                         interruptions, bugs, or feature changes. Sakura does
@@ -1542,7 +1451,6 @@ a {
 
                 <section class="tos-section">
                     <h2>15. Changes to Sakura</h2>
-
                     <p>
                         Sakura may change, add, remove, or discontinue features
                         as development continues. Material changes to these
@@ -1552,7 +1460,6 @@ a {
 
                 <section class="tos-section">
                     <h2>16. Account Termination</h2>
-
                     <p>
                         You may stop using Sakura at any time. Sakura may also
                         suspend or terminate accounts when required by these
@@ -1563,7 +1470,6 @@ a {
 
                 <section class="tos-section">
                     <h2>17. Disclaimer</h2>
-
                     <p>
                         Sakura is provided on an as-available basis. To the
                         extent permitted by applicable law, Sakura is not
@@ -1575,7 +1481,6 @@ a {
 
                 <section class="tos-section">
                     <h2>18. Contact</h2>
-
                     <p>
                         Questions regarding these Terms of Service, privacy,
                         moderation, or account issues may be directed to the
@@ -1584,17 +1489,12 @@ a {
                 </section>
 
             </div>
-
         </div>
-
     </section>
 
 </main>
 
-<div
-    class="toast"
-    id="toast"
-></div>
+<div class="toast" id="toast"></div>
 
 <script type="module">
 
@@ -1614,13 +1514,18 @@ import {
 ========================= */
 
 const firebaseConfig = {
-    // PUT YOUR EXISTING FIREBASE CONFIG HERE
+    apiKey: "AIzaSyA-YOEif7OwXqPmiAzqrjNnwhB-Y9SFnJM",
+    authDomain: "sakura-social.firebaseapp.com",
+    projectId: "sakura-social",
+    storageBucket: "sakura-social.firebasestorage.app",
+    messagingSenderId: "254698136881",
+    appId: "1:254698136881:web:496e5a9526084751b13c10",
+    measurementId: "G-FVYTYBPN61"
 };
 
 let db = null;
 
 try {
-
     const app =
         initializeApp(firebaseConfig);
 
@@ -1628,12 +1533,10 @@ try {
         getFirestore(app);
 
 } catch (error) {
-
     console.error(
         "Firebase initialization failed:",
         error
     );
-
 }
 
 /* =========================
@@ -1844,7 +1747,6 @@ function showHome(push = true) {
         push &&
         window.location.hash !== "#home"
     ) {
-
         history.pushState(
             null,
             "",
@@ -1874,7 +1776,6 @@ function showTOS(push = true) {
         push &&
         window.location.hash !== "#terms"
     ) {
-
         history.pushState(
             null,
             "",
@@ -1895,11 +1796,8 @@ function renderRoute() {
         hash === "#tos" ||
         hash === "#terms-of-service"
     ) {
-
         showTOS(false);
-
     } else {
-
         showHome(false);
     }
 }
@@ -1911,11 +1809,8 @@ function navigateTo(hash) {
         hash === "#tos" ||
         hash === "#terms-of-service"
     ) {
-
         showTOS(true);
-
     } else {
-
         showHome(true);
     }
 }
@@ -1975,14 +1870,16 @@ betaForm.addEventListener(
         betaStatus.textContent =
             "Joining the beta...";
 
-        betaForm
-            .querySelector("button")
-            .disabled = true;
+        const submitButton =
+            betaForm.querySelector(
+                "button"
+            );
+
+        submitButton.disabled = true;
 
         try {
 
             if (!db) {
-
                 throw new Error(
                     "Firebase is not initialized."
                 );
@@ -1995,6 +1892,7 @@ betaForm.addEventListener(
                 ),
                 {
                     email,
+
                     createdAt:
                         serverTimestamp(),
 
@@ -2015,6 +1913,7 @@ betaForm.addEventListener(
         } catch (error) {
 
             console.error(
+                "Beta signup failed:",
                 error
             );
 
@@ -2027,12 +1926,9 @@ betaForm.addEventListener(
 
         } finally {
 
-            betaForm
-                .querySelector("button")
-                .disabled = false;
-
+            submitButton.disabled =
+                false;
         }
-
     }
 );
 
