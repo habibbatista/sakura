@@ -3,55 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1c1c20">
-<meta name="color-scheme" content="dark">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<title>Sakura - Terms of Service</title>
+<meta name="theme-color" content="#08090b">
+<title>Sakura</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*,
-*::before,
-*::after {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+:root {
+    --bg: #08090b;
+    --bg2: #0d0f12;
+    --panel: rgba(20, 22, 27, .72);
+    --panel-solid: #15171c;
+    --text: #f5f5f7;
+    --muted: #969aa5;
+    --soft: #c8cbd2;
+    --line: rgba(255,255,255,.09);
+    --line-strong: rgba(255,255,255,.14);
+    --accent: #ff9fbd;
+    --accent-soft: rgba(255,159,189,.14);
+    --radius: 22px;
+}
+
 html {
-    height: 100%;
+    background: var(--bg);
     color-scheme: dark;
     scroll-behavior: smooth;
-    background: #1c1c20;
 }
 
 body {
     min-height: 100vh;
-    min-height: 100dvh;
-    font-family: "Red Hat Display", sans-serif;
-    color: #ffffff;
-    background: linear-gradient(
-        to bottom,
-        #1c1c20 0%,
-        #151518 35%,
-        #0e0e10 65%,
-        #050506 100%
-    );
-    background-attachment: fixed;
     overflow-x: hidden;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255,159,189,.08), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(255,159,189,.055), transparent 30%),
+        linear-gradient(145deg, #07080a, #0b0d10 50%, #08090b);
+    color: var(--text);
+    font-family: "Red Hat Display", sans-serif;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
 }
 
-input,
 button,
-select,
-textarea {
+input {
     font: inherit;
 }
 
@@ -60,703 +60,705 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
-button {
-    border: 0;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.sakura-header {
-    position: sticky;
+/* =========================
+   INTRO
+========================= */
+
+.sakura-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255,159,189,.085), transparent 30%),
+        #07080a;
+    transition:
+        opacity .75s ease,
+        visibility .75s ease;
+}
+
+.sakura-intro.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-grid {
+    position: absolute;
+    inset: -30%;
+    opacity: .14;
+    background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+    background-size: 52px 52px;
+    transform: perspective(600px) rotateX(58deg) translateY(12%);
+    animation: introGrid 10s linear infinite;
+}
+
+@keyframes introGrid {
+    from {
+        transform: perspective(600px) rotateX(58deg) translateY(12%);
+    }
+    to {
+        transform: perspective(600px) rotateX(58deg) translateY(64px);
+    }
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2;
+    width: min(440px, calc(100% - 48px));
+    text-align: center;
+    animation: introContent .95s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes introContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.intro-wordmark {
+    font-size: clamp(3rem, 14vw, 5rem);
+    line-height: .9;
+    font-weight: 800;
+    letter-spacing: -.065em;
+    color: #fff;
+    text-shadow: 0 0 35px rgba(255,159,189,.13);
+}
+
+.intro-subtitle {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: .95rem;
+    font-weight: 500;
+    letter-spacing: .015em;
+    min-height: 24px;
+}
+
+.intro-status {
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+}
+
+.intro-status.change {
+    opacity: 0;
+    transform: translateY(4px);
+}
+
+.intro-loader {
+    width: min(280px, 100%);
+    height: 3px;
+    margin: 28px auto 0;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgba(255,255,255,.08);
+}
+
+.intro-progress {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+    box-shadow: 0 0 18px rgba(255,159,189,.35);
+    animation: introProgress 2.15s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+@keyframes introProgress {
+    0% { width: 0%; }
+    22% { width: 19%; }
+    45% { width: 43%; }
+    68% { width: 68%; }
+    86% { width: 87%; }
+    100% { width: 100%; }
+}
+
+.intro-hint {
+    margin-top: 15px;
+    color: rgba(255,255,255,.3);
+    font-size: .72rem;
+    letter-spacing: .04em;
+}
+
+.intro-petals,
+.petal-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.intro-petal {
+    position: absolute;
+    top: -30px;
+    width: 9px;
+    height: 13px;
+    border-radius: 80% 20% 80% 20%;
+    background: rgba(255,159,189,.55);
+    filter: blur(.1px);
+    animation: introFall linear forwards;
+}
+
+@keyframes introFall {
+    0% {
+        transform: translate3d(0,-30px,0) rotate(0deg);
+        opacity: 0;
+    }
+    12% {
+        opacity: .7;
+    }
+    100% {
+        transform: translate3d(var(--drift),110vh,0) rotate(540deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    position: fixed;
     top: 0;
-    z-index: 100;
-    width: 100%;
-    height: calc(60px + env(safe-area-inset-top, 0px));
+    left: 0;
+    right: 0;
+    z-index: 500;
+    padding:
+        max(14px, env(safe-area-inset-top))
+        18px
+        0;
+}
+
+.header-inner {
+    max-width: 1180px;
+    height: 64px;
+    margin: 0 auto;
+    padding: 0 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-left: max(20px, env(safe-area-inset-left, 0px));
-    padding-right: max(20px, env(safe-area-inset-right, 0px));
+    background: rgba(13,15,18,.66);
+    border: 1px solid rgba(255,255,255,.085);
+    border-radius: 18px;
 
-    background: linear-gradient(
-        180deg,
-        rgba(15, 15, 18, 0.95) 0%,
-        rgba(15, 15, 18, 0.75) 40%,
-        rgba(15, 15, 18, 0.35) 75%,
-        rgba(15, 15, 18, 0) 100%
-    );
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
 
-    border: 0;
-    outline: 0;
+    box-shadow:
+        0 16px 50px rgba(0,0,0,.24),
+        inset 0 1px rgba(255,255,255,.025);
+
+    animation: headerIn .75s .1s cubic-bezier(.2,.8,.2,1) both;
 }
 
-.sakura-header:hover {
-    background: linear-gradient(
-        180deg,
-        rgba(25, 25, 30, 0.98) 0%,
-        rgba(25, 25, 30, 0.8) 40%,
-        rgba(25, 25, 30, 0.4) 75%,
-        rgba(25, 25, 30, 0) 100%
-    );
+@keyframes headerIn {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.sakura-title {
-    display: inline-flex;
-    align-items: center;
-
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    text-decoration: none;
-
-    cursor: pointer;
-
-    transition:
-        opacity 180ms ease,
-        transform 180ms ease;
+.wordmark {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -.045em;
 }
 
-.sakura-title:hover {
-    transform: translateY(-1px);
-}
-
-.sakura-title:active {
-    transform: scale(0.97);
-    opacity: 0.8;
-}
-
-.sakura-auth {
+.nav {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 }
 
-.sakura-auth-link {
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-
-    padding: 5px 12px;
-    border-radius: 16px;
-
+.nav-button {
+    border: 0;
+    background: transparent;
+    color: #aeb2bb;
+    padding: 9px 13px;
+    border-radius: 11px;
+    cursor: pointer;
     transition:
-        color 180ms ease,
-        background 180ms ease,
-        transform 180ms ease;
+        color .2s ease,
+        background .2s ease,
+        transform .2s ease;
 }
 
-.sakura-auth-link:hover,
-.sakura-auth-link.active {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-1px);
+.nav-button:hover {
+    color: #fff;
+    background: rgba(255,255,255,.06);
 }
 
-.sakura-auth-link:active {
-    transform: scale(0.96);
+.nav-button:active {
+    transform: scale(.96);
 }
 
-.petal-container {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
+.nav-button.primary {
+    color: #111;
+    background: #fff;
+    font-weight: 700;
 }
 
-.petal {
-    position: absolute;
-    top: -10%;
-
-    width: 14px;
-    height: 14px;
-
-    background: radial-gradient(
-        circle,
-        rgba(255, 182, 193, 0.5) 0%,
-        rgba(255, 255, 255, 0.15) 80%
-    );
-
-    border-radius: 80% 0 80% 0;
-
-    animation: floatPetal 12s linear infinite;
-    will-change: transform, opacity;
+.nav-button.primary:hover {
+    background: #f0f0f0;
 }
 
-.petal:nth-child(1) {
-    left: 10%;
-    animation-duration: 14s;
-    animation-delay: 0s;
-    width: 14px;
-    height: 14px;
-}
-
-.petal:nth-child(2) {
-    left: 30%;
-    animation-duration: 18s;
-    animation-delay: 2s;
-    width: 10px;
-    height: 10px;
-}
-
-.petal:nth-child(3) {
-    left: 55%;
-    animation-duration: 11s;
-    animation-delay: 5s;
-    width: 16px;
-    height: 16px;
-}
-
-.petal:nth-child(4) {
-    left: 75%;
-    animation-duration: 15s;
-    animation-delay: 1s;
-    width: 12px;
-    height: 12px;
-}
-
-.petal:nth-child(5) {
-    left: 90%;
-    animation-duration: 19s;
-    animation-delay: 6s;
-    width: 15px;
-    height: 15px;
-}
-
-@keyframes floatPetal {
-    0% {
-        transform: translateY(-10vh) rotate(0deg) translateX(0);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.85;
-    }
-
-    90% {
-        opacity: 0.85;
-    }
-
-    100% {
-        transform: translateY(110vh) rotate(360deg) translateX(80px);
-        opacity: 0;
-    }
-}
+/* =========================
+   PAGE SYSTEM
+========================= */
 
 .page-container {
     position: relative;
-    width: 100%;
-    min-height: calc(100dvh - 60px);
-    overflow-x: hidden;
-    z-index: 2;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
-.page-view {
+.view {
+    min-height: 100vh;
     width: 100%;
-    transition:
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-
-    will-change: transform, filter, opacity;
+    padding:
+        calc(105px + env(safe-area-inset-top))
+        20px
+        calc(55px + env(safe-area-inset-bottom));
 }
 
 #home-view {
     position: relative;
-    transform: translateX(0);
-    opacity: 1;
-    filter: brightness(1);
-    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        opacity .55s ease,
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        visibility .55s ease;
 }
 
-#home-view.slide-behind {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    transform: translateX(-25%);
-    filter: brightness(0.2);
-    opacity: 0.4;
-
+#home-view.hidden-view {
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
+    transform: translateX(-45px) scale(.985);
 }
 
 #tos-view {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    min-height: 100vh;
+    padding:
+        calc(105px + env(safe-area-inset-top))
+        20px
+        calc(55px + env(safe-area-inset-bottom));
 
-    width: 100%;
-
-    max-height: 0;
-    overflow: hidden;
-
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
-
-    transform: translateX(100%);
-    opacity: 0;
-
-    z-index: 10;
-
-    background: linear-gradient(
-        to bottom,
-        #1c1c20 0%,
-        #151518 35%,
-        #0e0e10 65%,
-        #050506 100%
-    );
-
+    transform: translateX(55px);
     transition:
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0s linear 0.65s,
-        max-height 0s linear 0.65s;
+        opacity .55s ease,
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        visibility 0s linear .55s;
 }
 
 #tos-view.active {
-    position: relative;
-
-    max-height: none;
-    overflow: visible;
-
+    opacity: 1;
     visibility: visible;
     pointer-events: auto;
-
     transform: translateX(0);
-    opacity: 1;
-
-    transition-delay: 0s;
-}
-
-/* Home */
-
-.sakura-content {
-    width: 100%;
-    max-width: 760px;
-
-    margin: 0 auto;
-
-    padding:
-        36px
-        20px
-        max(50px, env(safe-area-inset-bottom, 0px))
-        20px;
-}
-
-.sakura-welcome {
-    margin-bottom: 6px;
-
-    color: #ffffff;
-
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.8px;
-
-    display: inline-block;
-
     transition:
-        transform 220ms ease,
-        text-shadow 220ms ease;
+        opacity .55s ease,
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        visibility 0s;
 }
 
-.sakura-welcome:hover {
-    transform: translateX(4px);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+/* =========================
+   HOME
+========================= */
+
+.home-content {
+    width: min(820px, 100%);
+    text-align: center;
+    animation: homeIn .9s .3s cubic-bezier(.2,.8,.2,1) both;
 }
 
-.sakura-subtitle {
-    color: rgba(255, 255, 255, 0.72);
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
+@keyframes homeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.sakura-beta-header {
-    margin-top: 24px;
-
-    color: rgba(255, 255, 255, 0.85);
-
-    font-size: 15px;
-    line-height: 1.65;
-}
-
-.sakura-beta-form {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 18px;
-    margin-bottom: 24px;
-
-    max-width: 460px;
-}
-
-.sakura-beta-input {
-    flex: 1;
-
-    min-width: 0;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 9999px;
-
-    padding: 12px 20px;
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    outline: none;
-
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-
-    transition:
-        background 180ms ease,
-        border-color 180ms ease,
-        box-shadow 180ms ease;
-}
-
-.sakura-beta-input::placeholder {
-    color: rgba(255, 255, 255, 0.45);
-}
-
-.sakura-beta-input:focus {
-    background: rgba(255, 255, 255, 0.11);
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
-}
-
-.sakura-beta-submit {
-    flex-shrink: 0;
-
-    background: #ffffff;
-    color: #121215;
-
-    border-radius: 9999px;
-
-    padding: 12px 24px;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 180ms ease,
-        opacity 180ms ease;
-}
-
-.sakura-beta-submit:hover {
-    transform: translateY(-1px);
-}
-
-.sakura-beta-submit:active {
-    transform: scale(0.97);
-    opacity: 0.85;
-}
-
-.sakura-beta-details {
-    color: rgba(255, 255, 255, 0.62);
-
-    font-size: 14px;
-    line-height: 1.65;
-
-    max-width: 680px;
-}
-
-/* TOS */
-
-.tos-full-page {
-    width: 100%;
-    max-width: 760px;
-
-    margin: 0 auto;
-
-    padding:
-        36px
-        20px
-        max(60px, calc(20px + env(safe-area-inset-bottom, 0px)))
-        20px;
-}
-
-.tos-hero-header {
-    margin-bottom: 32px;
-
-    padding-bottom: 22px;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-}
-
-.tos-page-title {
-    color: #ffffff;
-
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.8px;
-
-    margin-bottom: 8px;
-}
-
-.tos-meta-info {
-    display: flex;
+.eyebrow {
+    display: inline-flex;
     align-items: center;
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    color: rgba(255, 255, 255, 0.55);
-
-    font-size: 13px;
-    line-height: 1.5;
+    gap: 8px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255,159,189,.16);
+    border-radius: 999px;
+    background: rgba(255,159,189,.055);
+    color: #e7afc2;
+    font-size: .76rem;
+    font-weight: 600;
+    margin-bottom: 23px;
 }
 
-.tos-section {
+.eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(255,159,189,.65);
+}
+
+.home-title {
+    font-size: clamp(3rem, 10vw, 6.4rem);
+    line-height: .93;
+    letter-spacing: -.07em;
+    font-weight: 800;
+}
+
+.home-title span {
+    color: #b8bbc3;
+}
+
+.home-description {
+    max-width: 610px;
+    margin: 26px auto 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 2.5vw, 1.12rem);
+    line-height: 1.7;
+}
+
+.beta-card {
+    width: min(570px, 100%);
+    margin: 42px auto 0;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+
+    background: rgba(255,255,255,.045);
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.24),
+        inset 0 1px rgba(255,255,255,.025);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.beta-card input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    background: transparent;
+    padding: 13px 14px;
+}
+
+.beta-card input::placeholder {
+    color: #6f737c;
+}
+
+.beta-card button {
+    border: 0;
+    border-radius: 12px;
+    padding: 0 19px;
+    background: #fff;
+    color: #101114;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.beta-card button:hover {
+    background: #ededed;
+}
+
+.beta-card button:active {
+    transform: scale(.97);
+}
+
+.beta-status {
+    min-height: 24px;
+    margin-top: 13px;
+    color: #9ea2ac;
+    font-size: .82rem;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+}
+
+.feature {
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+    color: #858995;
+    background: rgba(255,255,255,.025);
+    font-size: .75rem;
+}
+
+/* =========================
+   PETALS
+========================= */
+
+.petal {
+    position: absolute;
+    top: -25px;
+    width: 8px;
+    height: 12px;
+    border-radius: 80% 20% 80% 20%;
+    background: rgba(255,159,189,.25);
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-30px) translateX(0) rotate(0);
+        opacity: 0;
+    }
+    12% {
+        opacity: .65;
+    }
+    100% {
+        transform: translateY(110vh) translateX(var(--drift)) rotate(540deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   TOS
+========================= */
+
+.tos-shell {
+    width: min(920px, 100%);
+    margin: 0 auto;
+}
+
+.tos-top {
     margin-bottom: 34px;
 }
 
-.tos-section:last-child {
-    margin-bottom: 0;
-}
-
-.tos-section-title {
-    display: flex;
+.tos-back {
+    display: inline-flex;
     align-items: center;
-
-    color: #ffffff;
-
-    font-size: 18px;
-    font-weight: 700;
-
-    line-height: 1.35;
-
-    margin-bottom: 10px;
+    gap: 7px;
+    border: 0;
+    background: transparent;
+    color: #9b9fa8;
+    padding: 8px 0;
+    margin-bottom: 22px;
+    cursor: pointer;
+    transition: color .2s ease;
 }
 
-.tos-body-text {
-    color: rgba(255, 255, 255, 0.82);
-
-    font-size: 15px;
-    line-height: 1.7;
-
-    margin-bottom: 12px;
+.tos-back:hover {
+    color: #fff;
 }
 
-.tos-body-text:last-child {
-    margin-bottom: 0;
+.tos-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: -.065em;
+    line-height: .95;
+    font-weight: 800;
 }
 
-.tos-age-block {
-    margin: 18px 0;
+.tos-updated {
+    margin-top: 13px;
+    color: #777b85;
+    font-size: .85rem;
 }
 
-.tos-age-title {
-    color: #ffffff;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    margin-bottom: 8px;
+.tos-intro {
+    margin-top: 24px;
+    color: #aeb2bb;
+    line-height: 1.75;
+    max-width: 760px;
 }
 
-.tos-appeal-block {
-    margin-top: 18px;
+.tos-card {
+    padding: clamp(22px, 4vw, 38px);
+    background: rgba(16,18,22,.72);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+        0 25px 90px rgba(0,0,0,.25),
+        inset 0 1px rgba(255,255,255,.025);
 }
 
-.tos-appeal-block strong {
-    color: #ffffff;
+.tos-section {
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(255,255,255,.065);
 }
 
-.tos-list {
-    margin-top: 10px;
-
-    padding-left: 22px;
-
-    color: rgba(255, 255, 255, 0.8);
-
-    font-size: 14px;
-    line-height: 1.7;
+.tos-section:first-child {
+    padding-top: 0;
 }
 
-.tos-list li {
-    margin-bottom: 8px;
+.tos-section:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
 }
 
-.tos-list li:last-child {
-    margin-bottom: 0;
+.tos-section h2 {
+    font-size: 1.15rem;
+    margin-bottom: 11px;
+    color: #f2f2f4;
 }
 
-.tos-note {
-    margin-top: 14px;
+.tos-section p {
+    color: #9da1aa;
+    line-height: 1.75;
+    font-size: .94rem;
+}
 
-    padding: 14px 16px;
+.tos-section ul {
+    margin: 12px 0 0 20px;
+    color: #9da1aa;
+}
 
-    background: rgba(255, 255, 255, 0.045);
-
-    border-left: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-
-    color: rgba(255, 255, 255, 0.7);
-
-    font-size: 13px;
+.tos-section li {
+    margin: 7px 0;
     line-height: 1.65;
 }
 
-.tos-action-footer {
-    margin-top: 44px;
-
-    padding-top: 24px;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+.tos-highlight {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 13px;
+    background: rgba(255,159,189,.055);
+    border: 1px solid rgba(255,159,189,.11);
+    color: #c5aab3;
+    line-height: 1.65;
+    font-size: .9rem;
 }
 
-.tos-footer-text {
-    color: rgba(255, 255, 255, 0.5);
+/* =========================
+   TOAST
+========================= */
 
-    font-size: 13px;
-    line-height: 1.5;
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(22px + env(safe-area-inset-bottom));
+    z-index: 1000;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: rgba(22,24,29,.9);
+    color: #dfe1e5;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    transition: .3s ease;
+    white-space: nowrap;
 }
 
-.tos-home-button {
-    flex-shrink: 0;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(255, 255, 255, 0.1);
-
-    border: 1px solid rgba(255, 255, 255, 0.14);
-
-    border-radius: 9999px;
-
-    padding: 10px 20px;
-
-    color: #ffffff;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    transition:
-        background 180ms ease,
-        transform 180ms ease;
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
 }
 
-.tos-home-button:hover {
-    background: rgba(255, 255, 255, 0.16);
-    transform: translateY(-1px);
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.tos-home-button:active {
-    transform: scale(0.97);
-}
-
-/* Accessibility */
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
+@media (max-width: 600px) {
+    .site-header {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
+    .header-inner {
+        height: 58px;
+        padding: 0 12px;
+        border-radius: 16px;
+    }
+
+    .wordmark {
+        font-size: 1.12rem;
+    }
+
+    .nav-button {
+        padding: 8px 9px;
+        font-size: .82rem;
+    }
+
+    .nav-button.primary {
+        padding-left: 11px;
+        padding-right: 11px;
+    }
+
+    .view,
+    #tos-view {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .beta-card {
+        flex-direction: column;
+        padding: 7px;
+    }
+
+    .beta-card input {
+        padding: 13px 12px;
+    }
+
+    .beta-card button {
+        min-height: 45px;
+    }
+
+    .tos-card {
+        border-radius: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
         scroll-behavior: auto !important;
-    }
-}
-
-/* Mobile */
-
-@media (max-width: 640px) {
-    .sakura-header {
-        height: calc(52px + env(safe-area-inset-top, 0px));
-
-        padding-left: max(16px, env(safe-area-inset-left, 0px));
-        padding-right: max(16px, env(safe-area-inset-right, 0px));
-    }
-
-    .sakura-title {
-        font-size: 18px;
-    }
-
-    .sakura-auth {
-        gap: 4px;
-    }
-
-    .sakura-auth-link {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
-
-    .sakura-content {
-        padding:
-            30px
-            18px
-            max(40px, env(safe-area-inset-bottom, 0px))
-            18px;
-    }
-
-    .sakura-welcome {
-        font-size: 28px;
-        margin-bottom: 8px;
-    }
-
-    .sakura-subtitle {
-        font-size: 15px;
-        line-height: 1.55;
-    }
-
-    .sakura-beta-form {
-        flex-direction: column;
-    }
-
-    .sakura-beta-submit {
-        width: 100%;
-    }
-
-    .tos-full-page {
-        padding:
-            24px
-            14px
-            max(44px, calc(20px + env(safe-area-inset-bottom, 0px)))
-            14px;
-    }
-
-    .tos-page-title {
-        font-size: 26px;
-    }
-
-    .tos-action-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .tos-home-button {
-        width: 100%;
     }
 }
 </style>
@@ -764,987 +766,688 @@ button {
 
 <body>
 
-<div class="petal-container" aria-hidden="true">
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
+<!-- =========================
+     INTRO
+========================= -->
+
+<div id="sakura-intro" class="sakura-intro">
+    <div class="intro-grid"></div>
+    <div class="intro-petals" id="intro-petals"></div>
+
+    <div class="intro-content">
+        <div class="intro-wordmark">Sakura</div>
+
+        <div class="intro-subtitle">
+            <span class="intro-status" id="intro-status">Connecting...</span>
+        </div>
+
+        <div class="intro-loader">
+            <div class="intro-progress"></div>
+        </div>
+
+        <div class="intro-hint">Preparing your space</div>
+    </div>
 </div>
 
-<header class="sakura-header">
-    <a href="#home" class="sakura-title" id="brand-logo">
-        Sakura
-    </a>
+<!-- =========================
+     HEADER
+========================= -->
 
-    <nav class="sakura-auth" aria-label="Main navigation">
-        <a href="#terms" class="sakura-auth-link" id="nav-tos-link">
-            TOS
-        </a>
+<header class="site-header">
+    <div class="header-inner">
+        <button class="wordmark" id="brand-button" aria-label="Go home">
+            Sakura
+        </button>
 
-        <a href="#login" class="sakura-auth-link" id="login-link">
-            Login
-        </a>
-
-        <a href="#register" class="sakura-auth-link" id="register-link">
-            Register
-        </a>
-    </nav>
+        <nav class="nav">
+            <button class="nav-button" id="tos-button">TOS</button>
+            <button class="nav-button">Login</button>
+            <button class="nav-button primary">Register</button>
+        </nav>
+    </div>
 </header>
 
-<div class="page-container">
+<!-- =========================
+     PETALS
+========================= -->
+
+<div class="petal-layer" id="petals"></div>
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<main class="page-container">
 
     <!-- HOME -->
 
-    <section id="home-view" class="page-view active">
+    <section id="home-view" class="view">
+        <div class="home-content">
 
-        <main class="sakura-content">
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Sakura Beta
+            </div>
 
-            <h1 class="sakura-welcome">
-                Welcome to Sakura
+            <h1 class="home-title">
+                Welcome to <span>Sakura.</span>
             </h1>
 
-            <p class="sakura-subtitle">
+            <p class="home-description">
                 A place to connect, share, and stay together.
+                Sakura is being built around people instead of algorithms,
+                noise, and endless engagement tricks.
             </p>
 
-            <p class="sakura-beta-header">
-                Sakura is currently beta software and in testing.
-                You must join the beta program to gain access.
-                Submit your email address below to join the waitlist
-                and request beta access.
-            </p>
-
-            <form class="sakura-beta-form" id="beta-form">
-
+            <form class="beta-card" id="beta-form">
                 <input
-                    type="email"
                     id="beta-email"
-                    class="sakura-beta-input"
-                    placeholder="Enter your email address"
+                    type="email"
                     autocomplete="email"
+                    placeholder="Your email address"
                     required
                 >
 
-                <button
-                    type="submit"
-                    class="sakura-beta-submit"
-                >
-                    Join Beta
+                <button type="submit">
+                    Join beta
                 </button>
-
             </form>
 
-            <div class="sakura-beta-details">
-                <p>
-                    Access to the beta software is granted in testing
-                    groups as we build and refine the platform.
-                    Submitting your email adds you to our beta program
-                    list. You will receive an invitation email with
-                    instructions when your account is ready for testing.
-                </p>
-            </div>
-
-        </main>
-
-    </section>
-
-
-    <!-- TERMS OF SERVICE -->
-
-    <section id="tos-view" class="page-view" aria-labelledby="tos-title">
-
-        <div class="tos-full-page">
-
-            <div class="tos-hero-header">
-
-                <h1
-                    class="tos-page-title"
-                    id="tos-title"
-                >
-                    Terms of Service
-                </h1>
-
-                <div class="tos-meta-info">
-                    <span>Effective Date: September 2026</span>
-                    <span>&bull;</span>
-                    <span>Official User Agreement</span>
-                </div>
-
-            </div>
-
-
-            <div class="tos-card">
-
-                <!-- 1 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        1. Acceptance of Terms
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Welcome to Sakura ("Sakura," "we," "our," or "us").
-                        By creating an account, accessing, or using our
-                        platform and connected chat services (collectively,
-                        the "Service"), you acknowledge that you have read,
-                        understood, and agree to these Terms of Service
-                        ("Terms").
-                    </p>
-
-                    <p class="tos-body-text">
-                        If you do not agree to these Terms, you must not
-                        create an account or use the Service.
-                    </p>
-
-                </section>
-
-
-                <!-- 2 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        2. Age Eligibility & Account Enforcement
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura is intended for users who meet the minimum
-                        age requirements applicable to the Service and their
-                        jurisdiction. We take the privacy of younger users
-                        seriously and apply age-related account restrictions
-                        where required.
-                    </p>
-
-                    <div class="tos-age-block">
-
-                        <h3 class="tos-age-title">
-                            Minimum Age Requirement: 13 Years Old
-                        </h3>
-
-                        <p class="tos-body-text">
-                            You must be at least 13 years old, or the minimum
-                            legal digital consent age applicable in your
-                            country, to register an account or use Sakura.
-                            If Sakura receives information indicating that
-                            an account holder does not meet the applicable
-                            minimum age requirement, the account may be
-                            suspended or restricted while the situation is
-                            reviewed.
-                        </p>
-
-                    </div>
-
-                    <div class="tos-appeal-block">
-
-                        <strong>
-                            Age Verification Appeals via Yoti
-                        </strong>
-
-                        <p class="tos-body-text">
-                            If your account was incorrectly suspended or
-                            flagged for age non-compliance, you may submit
-                            an age verification appeal using our designated
-                            verification provider, Yoti.
-                        </p>
-
-                        <ul class="tos-list">
-
-                            <li>
-                                Select
-                                <strong>"Verify Age with Yoti"</strong>
-                                from the applicable verification prompt.
-                            </li>
-
-                            <li>
-                                Age verification is processed through Yoti's
-                                available age-verification methods.
-                            </li>
-
-                            <li>
-                                Sakura is designed to receive verification
-                                results rather than unnecessary identity
-                                documentation.
-                            </li>
-
-                            <li>
-                                If successful verification confirms that you
-                                meet the applicable age requirement, Sakura
-                                may restore access to the account.
-                            </li>
-
-                            <li>
-                                If verification fails or you encounter a
-                                technical issue, contact
-                                <strong>appeals@sakura.app</strong>.
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </section>
-
-
-                <!-- 3 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        3. Privacy & Data Confidentiality
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura is designed with privacy as a core principle.
-                        We limit access to user information to what is
-                        necessary to operate, secure, maintain, and moderate
-                        the Service.
-                    </p>
-
-                    <ul class="tos-list">
-
-                        <li>
-                            <strong>Private Messages & Attachments:</strong>
-                            Sakura does not routinely review private messages
-                            or media attachments sent between users.
-                        </li>
-
-                        <li>
-                            <strong>Moderation Context:</strong>
-                            When a message is reported through the Service,
-                            Sakura may retrieve a limited amount of
-                            surrounding message context necessary to review
-                            the report.
-                        </li>
-
-                        <li>
-                            <strong>Call Data:</strong>
-                            Sakura does not intentionally record or monitor
-                            the content of voice or video calls unless a
-                            feature explicitly states otherwise.
-                        </li>
-
-                        <li>
-                            <strong>Data Minimization:</strong>
-                            Sakura aims to collect and retain only information
-                            necessary for the operation, security, legal
-                            compliance, and improvement of the Service.
-                        </li>
-
-                    </ul>
-
-                    <div class="tos-note">
-                        Specific data collection, retention, deletion,
-                        cookies, analytics, and privacy rights are described
-                        in Sakura's Privacy Policy.
-                    </div>
-
-                </section>
-
-
-                <!-- 4 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        4. Account Registration & Security
-                    </h2>
-
-                    <p class="tos-body-text">
-                        You must provide accurate information when creating
-                        an account and must keep your account credentials
-                        secure.
-                    </p>
-
-                    <ul class="tos-list">
-
-                        <li>
-                            Do not knowingly provide false registration
-                            information.
-                        </li>
-
-                        <li>
-                            Do not share your password or authentication
-                            credentials with other people.
-                        </li>
-
-                        <li>
-                            You are responsible for activity performed
-                            through your account, except where caused by
-                            unauthorized access that you could not reasonably
-                            have prevented.
-                        </li>
-
-                        <li>
-                            Notify Sakura if you believe your account has
-                            been compromised.
-                        </li>
-
-                    </ul>
-
-                </section>
-
-
-                <!-- 5 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        5. Acceptable Conduct & Community Guidelines
-                    </h2>
-
-                    <p class="tos-body-text">
-                        You may not use Sakura to engage in conduct that
-                        violates applicable law, harms other users, disrupts
-                        the Service, or attempts to circumvent Sakura's
-                        security or moderation systems.
-                    </p>
-
-                    <ul class="tos-list">
-
-                        <li>
-                            Harassment, targeted abuse, or credible threats.
-                        </li>
-
-                        <li>
-                            Hate-based harassment or prohibited hateful
-                            content.
-                        </li>
-
-                        <li>
-                            Spam, coordinated disruption, or raids.
-                        </li>
-
-                        <li>
-                            Automated self-bots or unauthorized automation.
-                        </li>
-
-                        <li>
-                            Unauthorized scraping, data harvesting, or
-                            attempts to circumvent technical restrictions.
-                        </li>
-
-                        <li>
-                            Malware, credential theft, phishing, or other
-                            malicious activity.
-                        </li>
-
-                        <li>
-                            Illegal content or activity.
-                        </li>
-
-                        <li>
-                            Exploitation or abuse of other users.
-                        </li>
-
-                    </ul>
-
-                    <p class="tos-body-text">
-                        Depending on the circumstances, violations may result
-                        in warnings, content removal, temporary restrictions,
-                        suspension, or permanent termination.
-                    </p>
-
-                </section>
-
-
-                <!-- 6 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        6. Reporting & Moderation
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Users may report content or behavior that they believe
-                        violates Sakura's Terms or Community Guidelines.
-                        Reports may be reviewed by authorized moderation
-                        personnel or automated systems.
-                    </p>
-
-                    <p class="tos-body-text">
-                        When necessary to investigate a report, Sakura may
-                        access limited information relevant to the report,
-                        including surrounding message context.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Moderation decisions may take into account the
-                        severity, frequency, context, and history of the
-                        reported behavior.
-                    </p>
-
-                </section>
-
-
-                <!-- 7 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        7. Content Ownership & License
-                    </h2>
-
-                    <p class="tos-body-text">
-                        You retain ownership of original content that you
-                        create and submit to Sakura, subject to rights held
-                        by third parties whose material you use.
-                    </p>
-
-                    <p class="tos-body-text">
-                        By submitting content to Sakura, you grant Sakura a
-                        non-exclusive, worldwide, royalty-free license to
-                        store, transmit, format, reproduce, and display that
-                        content only as reasonably necessary to operate,
-                        provide, secure, and improve the Service.
-                    </p>
-
-                    <p class="tos-body-text">
-                        This license does not transfer ownership of your
-                        original content to Sakura.
-                    </p>
-
-                </section>
-
-
-                <!-- 8 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        8. Intellectual Property
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura's software, branding, visual design,
-                        trademarks, logos, and other original platform
-                        materials are owned by Sakura or its respective
-                        licensors and are protected by applicable intellectual
-                        property laws.
-                    </p>
-
-                    <p class="tos-body-text">
-                        You may not copy, redistribute, reverse engineer,
-                        modify, or commercially exploit Sakura's proprietary
-                        materials except where permitted by applicable law
-                        or with authorization from Sakura.
-                    </p>
-
-                </section>
-
-
-                <!-- 9 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        9. Beta Software & Service Availability
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura may be provided as beta software during testing.
-                        Beta features may contain bugs, interruptions,
-                        incomplete functionality, or changes that are not
-                        present in later versions.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Sakura does not guarantee that the Service will always
-                        be available, uninterrupted, or error-free.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Features may be added, changed, temporarily disabled,
-                        or removed as the platform develops.
-                    </p>
-
-                </section>
-
-
-                <!-- 10 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        10. Third-Party Services
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura may integrate with third-party services for
-                        functions such as authentication, age verification,
-                        hosting, communications, analytics, payments, or
-                        security.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Third-party services may have their own terms and
-                        privacy policies. Sakura is not responsible for
-                        independent actions or policies of third-party
-                        providers outside Sakura's control.
-                    </p>
-
-                </section>
-
-
-                <!-- 11 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        11. Account Suspension & Termination
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura may restrict, suspend, or terminate an account
-                        when reasonably necessary to enforce these Terms,
-                        protect users, investigate abuse, maintain platform
-                        security, comply with legal obligations, or prevent
-                        misuse of the Service.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Where appropriate, Sakura may provide notice or an
-                        opportunity to appeal a moderation or account action.
-                        Certain security, legal, or safety circumstances may
-                        require immediate restrictions.
-                    </p>
-
-                </section>
-
-
-                <!-- 12 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        12. Account Deletion
-                    </h2>
-
-                    <p class="tos-body-text">
-                        You may request deletion of your Sakura account
-                        through the account controls or designated support
-                        channels.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Account deletion may not immediately remove information
-                        that Sakura is required or permitted to retain for
-                        security, fraud prevention, legal compliance, dispute
-                        resolution, or other legitimate purposes.
-                    </p>
-
-                </section>
-
-
-                <!-- 13 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        13. Security
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura uses technical and organizational measures
-                        intended to protect the Service and user information.
-                        However, no internet-connected service can guarantee
-                        absolute security.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Users must not attempt to bypass security controls,
-                        exploit vulnerabilities without authorization, or
-                        interfere with the operation of the Service.
-                    </p>
-
-                </section>
-
-
-                <!-- 14 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        14. Changes to the Service and Terms
-                    </h2>
-
-                    <p class="tos-body-text">
-                        Sakura may modify the Service, these Terms, or related
-                        policies as the platform develops.
-                    </p>
-
-                    <p class="tos-body-text">
-                        When changes materially affect users, Sakura may
-                        provide notice through the Service or another
-                        appropriate communication method.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Continued use of the Service after an updated version
-                        becomes effective constitutes acceptance of the
-                        updated Terms where permitted by applicable law.
-                    </p>
-
-                </section>
-
-
-                <!-- 15 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        15. Disclaimers
-                    </h2>
-
-                    <p class="tos-body-text">
-                        The Service is provided subject to applicable law and
-                        may be offered on an "as available" basis during beta
-                        testing.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Sakura does not guarantee that the Service will meet
-                        every user's requirements or remain continuously
-                        available.
-                    </p>
-
-                </section>
-
-
-                <!-- 16 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        16. Limitation of Liability
-                    </h2>
-
-                    <p class="tos-body-text">
-                        To the maximum extent permitted by applicable law,
-                        Sakura and its operators will not be responsible for
-                        losses arising from interruptions, user-generated
-                        content, unauthorized account access, third-party
-                        services, or events outside Sakura's reasonable
-                        control.
-                    </p>
-
-                    <p class="tos-body-text">
-                        Nothing in these Terms excludes or limits liability
-                        where such exclusion or limitation is prohibited by
-                        applicable law.
-                    </p>
-
-                </section>
-
-
-                <!-- 17 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        17. Applicable Law
-                    </h2>
-
-                    <p class="tos-body-text">
-                        These Terms are subject to the laws and mandatory
-                        consumer protections applicable to Sakura and its
-                        users. Any specific governing-law or jurisdiction
-                        provisions will be provided in the applicable legal
-                        documentation.
-                    </p>
-
-                </section>
-
-
-                <!-- 18 -->
-
-                <section class="tos-section">
-
-                    <h2 class="tos-section-title">
-                        18. Contact & Legal Inquiries
-                    </h2>
-
-                    <p class="tos-body-text">
-                        For legal notices, compliance questions, privacy
-                        concerns, or questions regarding these Terms, contact
-                        Sakura at:
-                    </p>
-
-                    <ul class="tos-list">
-
-                        <li>
-                            <strong>Legal:</strong>
-                            legal@sakura.app
-                        </li>
-
-                        <li>
-                            <strong>Age Verification Appeals:</strong>
-                            appeals@sakura.app
-                        </li>
-
-                    </ul>
-
-                </section>
-
-
-                <!-- Footer -->
-
-                <div class="tos-action-footer">
-
-                    <span class="tos-footer-text">
-                        Thank you for being part of the Sakura community.
-                    </span>
-
-                    <a
-                        href="#home"
-                        class="tos-home-button"
-                        id="tos-home-button"
-                    >
-                        Back to Sakura
-                    </a>
-
-                </div>
-
+            <div class="beta-status" id="beta-status"></div>
+
+            <div class="feature-row">
+                <div class="feature">Privacy-focused</div>
+                <div class="feature">No unnecessary tracking</div>
+                <div class="feature">Built with people</div>
             </div>
 
         </div>
-
     </section>
 
-</div>
+    <!-- TOS -->
 
+    <section id="tos-view" class="view" aria-hidden="true">
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+        <div class="tos-shell">
 
-    const homeView = document.getElementById("home-view");
-    const tosView = document.getElementById("tos-view");
-    const navTosLink = document.getElementById("nav-tos-link");
-    const brandLogo = document.getElementById("brand-logo");
-    const tosHomeButton = document.getElementById("tos-home-button");
-    const betaForm = document.getElementById("beta-form");
-    const loginLink = document.getElementById("login-link");
-    const registerLink = document.getElementById("register-link");
+            <div class="tos-top">
 
-    const isTOSRoute = () => {
-        const hash = window.location.hash.toLowerCase();
-        const pathname = window.location.pathname.toLowerCase();
+                <button class="tos-back" id="tos-back">
+                    ← Back to Sakura
+                </button>
 
-        return (
-            hash === "#terms" ||
-            hash === "#tos" ||
-            pathname.endsWith("/tos")
-        );
-    };
+                <h1 class="tos-title">Terms of Service</h1>
 
+                <p class="tos-updated">
+                    Last updated: September 24, 2026
+                </p>
 
-    function updateRoute(replace = false) {
+                <p class="tos-intro">
+                    These Terms of Service explain the rules for using Sakura.
+                    By creating or using a Sakura account, you agree to follow
+                    these terms.
+                </p>
 
-        const target = isTOSRoute()
-            ? "#terms"
-            : "#home";
+            </div>
 
-        if (window.location.hash !== target) {
+            <div class="tos-card">
 
-            if (replace) {
-                window.history.replaceState(
-                    null,
-                    "",
-                    target
-                );
-            } else {
-                window.history.pushState(
-                    null,
-                    "",
-                    target
-                );
-            }
-        }
+                <section class="tos-section">
+                    <h2>1. Acceptance of the Terms</h2>
+                    <p>
+                        By accessing or using Sakura, you agree to these Terms
+                        of Service and any policies referenced by them. If you
+                        do not agree with these terms, you should not use Sakura.
+                    </p>
+                </section>
 
-        renderRoute();
+                <section class="tos-section">
+                    <h2>2. Eligibility</h2>
+                    <p>
+                        You must be at least 13 years old, or the minimum age
+                        required to independently consent to digital services
+                        in your jurisdiction, whichever is higher.
+                    </p>
+
+                    <div class="tos-highlight">
+                        Sakura may require age verification through Yoti when
+                        necessary. Sakura is designed to avoid retaining raw
+                        identity documents or biometric information from the
+                        verification process.
+                    </div>
+                </section>
+
+                <section class="tos-section">
+                    <h2>3. Your Account</h2>
+                    <p>
+                        You are responsible for keeping your account credentials
+                        secure and for activity performed through your account.
+                        You must provide accurate information when creating an
+                        account and must not intentionally impersonate another
+                        person.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>4. Prohibited Conduct</h2>
+                    <p>
+                        You may not use Sakura to:
+                    </p>
+
+                    <ul>
+                        <li>Harass, threaten, or intentionally intimidate others.</li>
+                        <li>Distribute illegal content or facilitate illegal activity.</li>
+                        <li>Attempt to compromise Sakura or another user's account.</li>
+                        <li>Distribute malware, destructive code, or malicious links.</li>
+                        <li>Conduct scams, phishing, fraud, or impersonation intended to deceive.</li>
+                        <li>Use Sakura to exploit or endanger minors.</li>
+                        <li>Evade enforcement actions through repeated account creation.</li>
+                    </ul>
+                </section>
+
+                <section class="tos-section">
+                    <h2>5. Content</h2>
+                    <p>
+                        You retain ownership of content you create and upload.
+                        By posting content to Sakura, you grant Sakura the
+                        limited permissions necessary to store, transmit,
+                        display, and technically process that content so the
+                        service can function.
+                    </p>
+
+                    <p style="margin-top:12px;">
+                        Sakura does not claim ownership of your content merely
+                        because you post it on the platform.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>6. Message Privacy</h2>
+                    <p>
+                        Sakura is designed so that private messages and normal
+                        conversations are not routinely reviewed by Sakura
+                        staff.
+                    </p>
+
+                    <div class="tos-highlight">
+                        When a message is reported, Sakura may receive a
+                        limited set of recent messages surrounding the reported
+                        message solely to understand the report and enforce
+                        these terms.
+                    </div>
+
+                    <p style="margin-top:12px;">
+                        This means Sakura does not operate by continuously
+                        reading everyone's conversations.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>7. Voice and Video Calls</h2>
+                    <p>
+                        Sakura does not intentionally record or permanently
+                        store private voice or video calls for routine
+                        moderation.
+                    </p>
+
+                    <p style="margin-top:12px;">
+                        Technical information required to establish and maintain
+                        a call may still be processed by the systems that make
+                        the call possible.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>8. Reports</h2>
+                    <p>
+                        Users may report content or accounts that they believe
+                        violate these terms. Reports should be made honestly
+                        and should not be abused to intentionally target users.
+                    </p>
+
+                    <p style="margin-top:12px;">
+                        Sakura may review the relevant limited context needed
+                        to investigate a report.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>9. Moderation</h2>
+                    <p>
+                        Sakura may restrict, remove, suspend, or terminate
+                        accounts or content when reasonably necessary to
+                        enforce these terms, protect users, comply with law,
+                        or protect the service.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>10. Age Enforcement</h2>
+                    <p>
+                        If Sakura reasonably determines that an account belongs
+                        to someone below the minimum required age, the account
+                        may be suspended.
+                    </p>
+
+                    <p style="margin-top:12px;">
+                        Eligible users may be able to appeal an age-related
+                        suspension through an appropriate verification process,
+                        including Yoti where available.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>11. Privacy</h2>
+                    <p>
+                        Sakura aims to collect only information reasonably
+                        necessary to operate, secure, improve, and support the
+                        service.
+                    </p>
+
+                    <p style="margin-top:12px;">
+                        Information collected through Sakura should be handled
+                        according to the Sakura Privacy Policy.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>12. Security</h2>
+                    <p>
+                        You must not attempt to bypass authentication,
+                        compromise infrastructure, access another user's
+                        account, or interfere with Sakura's availability.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>13. Third-Party Services</h2>
+                    <p>
+                        Sakura may rely on third-party infrastructure and
+                        services to provide functionality such as
+                        authentication, hosting, databases, age verification,
+                        notifications, analytics, or email delivery.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>14. Availability</h2>
+                    <p>
+                        Sakura may experience downtime, maintenance,
+                        interruptions, bugs, or feature changes. Sakura does
+                        not guarantee that the service will always be available
+                        or error-free.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>15. Changes to Sakura</h2>
+                    <p>
+                        Sakura may change, add, remove, or discontinue features
+                        as development continues. Material changes to these
+                        terms may be communicated through appropriate channels.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>16. Account Termination</h2>
+                    <p>
+                        You may stop using Sakura at any time. Sakura may also
+                        suspend or terminate accounts when required by these
+                        terms, applicable law, or legitimate safety and security
+                        needs.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>17. Disclaimer</h2>
+                    <p>
+                        Sakura is provided on an as-available basis. To the
+                        extent permitted by applicable law, Sakura is not
+                        responsible for losses resulting from interruptions,
+                        user-generated content, unauthorized account access,
+                        or events outside Sakura's reasonable control.
+                    </p>
+                </section>
+
+                <section class="tos-section">
+                    <h2>18. Contact</h2>
+                    <p>
+                        Questions regarding these Terms of Service, privacy,
+                        moderation, or account issues may be directed to the
+                        official Sakura support channels.
+                    </p>
+                </section>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+    // PUT YOUR EXISTING FIREBASE CONFIG HERE
+};
+
+let db = null;
+
+try {
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+} catch (error) {
+    console.error("Firebase initialization failed:", error);
+}
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const intro = document.getElementById("sakura-intro");
+const introStatus = document.getElementById("intro-status");
+const introPetals = document.getElementById("intro-petals");
+
+const homeView = document.getElementById("home-view");
+const tosView = document.getElementById("tos-view");
+
+const tosButton = document.getElementById("tos-button");
+const tosBack = document.getElementById("tos-back");
+const brandButton = document.getElementById("brand-button");
+
+const betaForm = document.getElementById("beta-form");
+const betaEmail = document.getElementById("beta-email");
+const betaStatus = document.getElementById("beta-status");
+
+const toast = document.getElementById("toast");
+
+/* =========================
+   INTRO PETALS
+========================= */
+
+function createIntroPetal() {
+    const petal = document.createElement("span");
+
+    petal.className = "intro-petal";
+
+    const size = 5 + Math.random() * 7;
+    const duration = 4 + Math.random() * 5;
+    const delay = Math.random() * 2;
+    const drift = `${-100 + Math.random() * 200}px`;
+
+    petal.style.left = `${Math.random() * 100}%`;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size * 1.35}px`;
+    petal.style.animationDuration = `${duration}s`;
+    petal.style.animationDelay = `${delay}s`;
+    petal.style.setProperty("--drift", drift);
+
+    introPetals.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, (duration + delay) * 1000 + 500);
+}
+
+for (let i = 0; i < 18; i++) {
+    createIntroPetal();
+}
+
+/* =========================
+   INTRO STATUS
+========================= */
+
+const introMessages = [
+    "Connecting...",
+    "Finding petals...",
+    "Watering the sakura...",
+    "Almost ready..."
+];
+
+let introMessageIndex = 0;
+
+const statusInterval = setInterval(() => {
+
+    introStatus.classList.add("change");
+
+    setTimeout(() => {
+
+        introMessageIndex =
+            (introMessageIndex + 1) % introMessages.length;
+
+        introStatus.textContent =
+            introMessages[introMessageIndex];
+
+        introStatus.classList.remove("change");
+
+    }, 180);
+
+}, 520);
+
+/* =========================
+   INTRO END
+========================= */
+
+setTimeout(() => {
+
+    clearInterval(statusInterval);
+
+    introStatus.textContent = "Welcome to Sakura";
+
+    setTimeout(() => {
+        intro.classList.add("hidden");
+    }, 350);
+
+}, 2450);
+
+/* =========================
+   PAGE ROUTING
+========================= */
+
+function showHome(push = true) {
+
+    homeView.classList.remove("hidden-view");
+
+    tosView.classList.remove("active");
+    tosView.setAttribute("aria-hidden", "true");
+
+    if (push && window.location.hash !== "#home") {
+        history.pushState(null, "", "#home");
+    }
+}
+
+function showTOS(push = true) {
+
+    homeView.classList.add("hidden-view");
+
+    tosView.classList.add("active");
+    tosView.setAttribute("aria-hidden", "false");
+
+    if (push && window.location.hash !== "#terms") {
+        history.pushState(null, "", "#terms");
     }
 
-
-    function renderRoute() {
-
-        const showingTOS = isTOSRoute();
-
-        if (showingTOS) {
-
-            homeView.classList.add("slide-behind");
-            tosView.classList.add("active");
-            navTosLink.classList.add("active");
-
-        } else {
-
-            tosView.classList.remove("active");
-            homeView.classList.remove("slide-behind");
-            navTosLink.classList.remove("active");
-
-        }
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
-
-    function navigateTo(hash) {
-
-        if (window.location.hash === hash) {
-            renderRoute();
-            return;
-        }
-
-        window.history.pushState(
-            null,
-            "",
-            hash
-        );
-
-        renderRoute();
-    }
-
-
-    navTosLink.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        navigateTo("#terms");
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
+}
 
+function renderRoute() {
 
-    brandLogo.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        navigateTo("#home");
-
-    });
-
-
-    tosHomeButton.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        navigateTo("#home");
-
-    });
-
-
-    window.addEventListener("popstate", renderRoute);
-
-    window.addEventListener("hashchange", renderRoute);
-
-
-    /*
-     * Login/Register are intentionally left as navigation targets
-     * until their actual pages are implemented.
-     *
-     * Preventing the default here avoids the current page being
-     * accidentally replaced by a nonexistent route.
-     */
-
-    loginLink.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        window.history.pushState(
-            null,
-            "",
-            "#login"
-        );
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    });
-
-
-    registerLink.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        window.history.pushState(
-            null,
-            "",
-            "#register"
-        );
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    });
-
-
-    betaForm.addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        const emailInput =
-            document.getElementById("beta-email");
-
-        if (!emailInput.checkValidity()) {
-
-            emailInput.reportValidity();
-
-            return;
-        }
-
-        /*
-         * Replace this with the actual beta waitlist API.
-         *
-         * No fake submission is performed here.
-         */
-
-        emailInput.blur();
-
-    });
-
-
-    /*
-     * Initial route.
-     *
-     * This also normalizes /TOS and #TOS to #terms.
-     */
+    const hash = window.location.hash.toLowerCase();
 
     if (
-        window.location.pathname.toLowerCase().endsWith("/tos") ||
-        window.location.hash.toLowerCase() === "#tos"
+        hash === "#terms" ||
+        hash === "#tos" ||
+        hash === "#terms-of-service"
     ) {
+        showTOS(false);
+    } else {
+        showHome(false);
+    }
+}
 
-        window.history.replaceState(
-            null,
-            "",
-            "#terms"
-        );
+function navigateTo(hash) {
 
-    } else if (
-        window.location.hash !== "#terms" &&
-        window.location.hash !== "#home" &&
-        window.location.hash !== "#login" &&
-        window.location.hash !== "#register"
+    if (
+        hash === "#terms" ||
+        hash === "#tos" ||
+        hash === "#terms-of-service"
     ) {
+        showTOS(true);
+    } else {
+        showHome(true);
+    }
+}
 
-        window.history.replaceState(
-            null,
-            "",
-            "#home"
-        );
+/* =========================
+   NAVIGATION
+========================= */
 
+tosButton.addEventListener("click", () => {
+    navigateTo("#terms");
+});
+
+tosBack.addEventListener("click", () => {
+    navigateTo("#home");
+});
+
+brandButton.addEventListener("click", () => {
+    navigateTo("#home");
+});
+
+window.addEventListener("popstate", renderRoute);
+window.addEventListener("hashchange", renderRoute);
+
+/* =========================
+   BETA WAITLIST
+========================= */
+
+betaForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const email = betaEmail.value.trim();
+
+    if (!email) {
+        return;
     }
 
-    renderRoute();
+    betaStatus.textContent = "Joining the beta...";
+    betaForm.querySelector("button").disabled = true;
 
+    try {
+
+        if (!db) {
+            throw new Error("Firebase is not initialized.");
+        }
+
+        await addDoc(collection(db, "betaWaitlist"), {
+            email,
+            createdAt: serverTimestamp(),
+            source: "sakura-web"
+        });
+
+        betaEmail.value = "";
+
+        betaStatus.textContent =
+            "You're on the list. We'll let you know when Sakura is ready.";
+
+        showToast("You're on the Sakura beta list.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        betaStatus.textContent =
+            "Something went wrong. Please try again.";
+
+        showToast("Couldn't join the beta.");
+
+    } finally {
+
+        betaForm.querySelector("button").disabled = false;
+    }
 });
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimeout;
+
+function showToast(message) {
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2800);
+}
+
+/* =========================
+   BACKGROUND PETALS
+========================= */
+
+const petals = document.getElementById("petals");
+
+function createPetal() {
+
+    const petal = document.createElement("span");
+
+    petal.className = "petal";
+
+    const size = 5 + Math.random() * 6;
+    const duration = 7 + Math.random() * 8;
+    const delay = Math.random() * 8;
+    const drift = `${-120 + Math.random() * 240}px`;
+
+    petal.style.left = `${Math.random() * 100}%`;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size * 1.35}px`;
+    petal.style.animationDuration = `${duration}s`;
+    petal.style.animationDelay = `${delay}s`;
+    petal.style.setProperty("--drift", drift);
+
+    petals.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, (duration + delay) * 1000 + 500);
+}
+
+for (let i = 0; i < 24; i++) {
+    createPetal();
+}
+
+setInterval(createPetal, 700);
+
+/* =========================
+   INITIAL ROUTE
+========================= */
+
+renderRoute();
+
 </script>
 
 </body>
