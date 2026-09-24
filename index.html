@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Red Hat Sans', sans-serif;
+    color: white;
+    background: linear-gradient(
+        180deg,
+        #061a3a 0%,
+        #04132b 35%,
+        #020817 65%,
+        #000208 100%
+    );
+    background-size: 100% 140%;
+    animation: backgroundMove 12s ease-in-out infinite alternate;
+}
+
+.sakura-header {
+    width: 100%;
+    height: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    background: rgba(0, 5, 18, 0.48);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    animation: headerEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sakura-title {
+    color: #ffffff;
+    font-family: 'Red Hat Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    animation: titleEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.sakura-content {
+    padding: 42px 24px;
+}
+
+.sakura-content h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.8px;
+    animation: contentEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+.sakura-content p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.68);
+    animation: contentEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+@keyframes headerEnter {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes contentEnter {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundMove {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 0% 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sakura-header">
+    <span class="sakura-title">Sakura</span>
+</div>
+
+<main class="sakura-content">
+    <h1>Welcome to Sakura</h1>
+    <p>A place to connect, share, and stay together.</p>
+</main>
+
+</body>
+</html>
