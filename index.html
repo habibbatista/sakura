@@ -25,18 +25,24 @@
 }
 
 html {
+    width: 100%;
+    height: 100%;
     background: var(--bg);
     color-scheme: dark;
-    scroll-behavior: smooth;
+    overflow: hidden;
 }
 
 body {
-    min-height: 100vh;
-    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+
     background:
         radial-gradient(circle at 15% 15%, rgba(255,159,189,.08), transparent 28%),
         radial-gradient(circle at 85% 80%, rgba(255,159,189,.055), transparent 30%),
         linear-gradient(145deg, #07080a, #0b0d10 50%, #08090b);
+
     color: var(--text);
     font-family: "Red Hat Display", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -271,7 +277,7 @@ a {
 
 .intro-petals,
 .petal-layer {
-    position: absolute;
+    position: fixed;
     inset: 0;
 
     overflow: hidden;
@@ -354,18 +360,13 @@ a {
     align-items: center;
     justify-content: space-between;
 
-    /*
-       Neutral gray → black.
-       No pink here.
-    */
     background:
         linear-gradient(
-            115deg,
-            rgba(118,121,127,.48) 0%,
-            rgba(82,84,90,.42) 28%,
-            rgba(49,51,56,.48) 55%,
-            rgba(20,21,25,.68) 78%,
-            rgba(5,6,8,.88) 100%
+            to bottom,
+            rgba(69,71,77,.48) 0%,
+            rgba(47,49,54,.48) 32%,
+            rgba(25,27,31,.68) 65%,
+            rgba(8,9,11,.94) 100%
         );
 
     border: none;
@@ -381,8 +382,8 @@ a {
         saturate(140%);
 
     box-shadow:
-        0 18px 55px rgba(0,0,0,.3),
-        inset 0 1px rgba(255,255,255,.035);
+        0 18px 55px rgba(0,0,0,.42),
+        inset 0 1px rgba(255,255,255,.025);
 
     animation:
         headerIn
@@ -469,19 +470,22 @@ a {
 ========================= */
 
 .page-container {
-    position: relative;
+    position: fixed;
+    inset: 0;
 
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
 
-    /*
-       IMPORTANT:
-       Do not clip the TOS content.
-    */
-    overflow: visible;
+    overflow: hidden;
 }
+
+/* =========================
+   VIEWS
+========================= */
 
 .view {
     width: 100%;
+    min-height: 100%;
 
     padding:
         calc(105px + env(safe-area-inset-top))
@@ -494,29 +498,33 @@ a {
 ========================= */
 
 #home-view {
-    position: relative;
+    position: absolute;
+    inset: 0;
 
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    overflow: hidden;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateX(0);
+
     transition:
         opacity .55s ease,
         transform .55s cubic-bezier(.2,.8,.2,1),
-        visibility .55s ease;
+        visibility 0s;
 }
 
 #home-view.hidden-view {
-    position: absolute;
-
-    inset: 0;
-
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 
     transform:
@@ -529,20 +537,20 @@ a {
 ========================= */
 
 #tos-view {
-    /*
-       Hidden TOS does not affect the page.
-    */
     position: absolute;
+    inset: 0;
 
-    left: 0;
-    right: 0;
+    width: 100%;
+    height: 100%;
 
-    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 
     transform: translateX(55px);
@@ -553,25 +561,9 @@ a {
         visibility 0s linear .55s;
 }
 
-/*
-   CRITICAL FIX:
-
-   Once TOS is active, it becomes relative
-   so its full height contributes to the document.
-   That allows normal body scrolling.
-*/
 #tos-view.active {
-    position: relative;
-
-    left: auto;
-    right: auto;
-
-    min-height: 100vh;
-
     opacity: 1;
-
     visibility: visible;
-
     pointer-events: auto;
 
     transform: translateX(0);
@@ -1348,24 +1340,17 @@ a {
             <div class="tos-card">
 
                 <section class="tos-section">
-
-                    <h2>
-                        1. Acceptance of the Terms
-                    </h2>
+                    <h2>1. Acceptance of the Terms</h2>
 
                     <p>
                         By accessing or using Sakura, you agree to these Terms
                         of Service and any policies referenced by them. If you
                         do not agree with these terms, you should not use Sakura.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        2. Eligibility
-                    </h2>
+                    <h2>2. Eligibility</h2>
 
                     <p>
                         You must be at least 13 years old, or the minimum age
@@ -1379,14 +1364,10 @@ a {
                         identity documents or biometric information from the
                         verification process.
                     </div>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        3. Your Account
-                    </h2>
+                    <h2>3. Your Account</h2>
 
                     <p>
                         You are responsible for keeping your account credentials
@@ -1395,56 +1376,28 @@ a {
                         account and must not intentionally impersonate another
                         person.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        4. Prohibited Conduct
-                    </h2>
+                    <h2>4. Prohibited Conduct</h2>
 
                     <p>
                         You may not use Sakura to:
                     </p>
 
                     <ul>
-                        <li>
-                            Harass, threaten, or intentionally intimidate others.
-                        </li>
-
-                        <li>
-                            Distribute illegal content or facilitate illegal activity.
-                        </li>
-
-                        <li>
-                            Attempt to compromise Sakura or another user's account.
-                        </li>
-
-                        <li>
-                            Distribute malware, destructive code, or malicious links.
-                        </li>
-
-                        <li>
-                            Conduct scams, phishing, fraud, or impersonation intended to deceive.
-                        </li>
-
-                        <li>
-                            Use Sakura to exploit or endanger minors.
-                        </li>
-
-                        <li>
-                            Evade enforcement actions through repeated account creation.
-                        </li>
+                        <li>Harass, threaten, or intentionally intimidate others.</li>
+                        <li>Distribute illegal content or facilitate illegal activity.</li>
+                        <li>Attempt to compromise Sakura or another user's account.</li>
+                        <li>Distribute malware, destructive code, or malicious links.</li>
+                        <li>Conduct scams, phishing, fraud, or impersonation intended to deceive.</li>
+                        <li>Use Sakura to exploit or endanger minors.</li>
+                        <li>Evade enforcement actions through repeated account creation.</li>
                     </ul>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        5. Content
-                    </h2>
+                    <h2>5. Content</h2>
 
                     <p>
                         You retain ownership of content you create and upload.
@@ -1458,14 +1411,10 @@ a {
                         Sakura does not claim ownership of your content merely
                         because you post it on the platform.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        6. Message Privacy
-                    </h2>
+                    <h2>6. Message Privacy</h2>
 
                     <p>
                         Sakura is designed so that private messages and normal
@@ -1484,14 +1433,10 @@ a {
                         This means Sakura does not operate by continuously
                         reading everyone's conversations.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        7. Voice and Video Calls
-                    </h2>
+                    <h2>7. Voice and Video Calls</h2>
 
                     <p>
                         Sakura does not intentionally record or permanently
@@ -1504,14 +1449,10 @@ a {
                         a call may still be processed by the systems that make
                         the call possible.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        8. Reports
-                    </h2>
+                    <h2>8. Reports</h2>
 
                     <p>
                         Users may report content or accounts that they believe
@@ -1523,14 +1464,10 @@ a {
                         Sakura may review the relevant limited context needed
                         to investigate a report.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        9. Moderation
-                    </h2>
+                    <h2>9. Moderation</h2>
 
                     <p>
                         Sakura may restrict, remove, suspend, or terminate
@@ -1538,14 +1475,10 @@ a {
                         enforce these terms, protect users, comply with law,
                         or protect the service.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        10. Age Enforcement
-                    </h2>
+                    <h2>10. Age Enforcement</h2>
 
                     <p>
                         If Sakura reasonably determines that an account belongs
@@ -1558,14 +1491,10 @@ a {
                         suspension through an appropriate verification process,
                         including Yoti where available.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        11. Privacy
-                    </h2>
+                    <h2>11. Privacy</h2>
 
                     <p>
                         Sakura aims to collect only information reasonably
@@ -1577,28 +1506,20 @@ a {
                         Information collected through Sakura should be handled
                         according to the Sakura Privacy Policy.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        12. Security
-                    </h2>
+                    <h2>12. Security</h2>
 
                     <p>
                         You must not attempt to bypass authentication,
                         compromise infrastructure, access another user's
                         account, or interfere with Sakura's availability.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        13. Third-Party Services
-                    </h2>
+                    <h2>13. Third-Party Services</h2>
 
                     <p>
                         Sakura may rely on third-party infrastructure and
@@ -1606,14 +1527,10 @@ a {
                         authentication, hosting, databases, age verification,
                         notifications, analytics, or email delivery.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        14. Availability
-                    </h2>
+                    <h2>14. Availability</h2>
 
                     <p>
                         Sakura may experience downtime, maintenance,
@@ -1621,28 +1538,20 @@ a {
                         not guarantee that the service will always be available
                         or error-free.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        15. Changes to Sakura
-                    </h2>
+                    <h2>15. Changes to Sakura</h2>
 
                     <p>
                         Sakura may change, add, remove, or discontinue features
                         as development continues. Material changes to these
                         terms may be communicated through appropriate channels.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        16. Account Termination
-                    </h2>
+                    <h2>16. Account Termination</h2>
 
                     <p>
                         You may stop using Sakura at any time. Sakura may also
@@ -1650,14 +1559,10 @@ a {
                         terms, applicable law, or legitimate safety and security
                         needs.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        17. Disclaimer
-                    </h2>
+                    <h2>17. Disclaimer</h2>
 
                     <p>
                         Sakura is provided on an as-available basis. To the
@@ -1666,21 +1571,16 @@ a {
                         user-generated content, unauthorized account access,
                         or events outside Sakura's reasonable control.
                     </p>
-
                 </section>
 
                 <section class="tos-section">
-
-                    <h2>
-                        18. Contact
-                    </h2>
+                    <h2>18. Contact</h2>
 
                     <p>
                         Questions regarding these Terms of Service, privacy,
                         moderation, or account issues may be directed to the
                         official Sakura support channels.
                     </p>
-
                 </section>
 
             </div>
@@ -1733,6 +1633,7 @@ try {
         "Firebase initialization failed:",
         error
     );
+
 }
 
 /* =========================
@@ -1951,10 +1852,7 @@ function showHome(push = true) {
         );
     }
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    tosView.scrollTop = 0;
 }
 
 function showTOS(push = true) {
@@ -1984,10 +1882,7 @@ function showTOS(push = true) {
         );
     }
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    tosView.scrollTop = 0;
 }
 
 function renderRoute() {
@@ -2135,7 +2030,9 @@ betaForm.addEventListener(
             betaForm
                 .querySelector("button")
                 .disabled = false;
+
         }
+
     }
 );
 
