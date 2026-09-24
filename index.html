@@ -19,17 +19,9 @@
 
 :root {
     --bg: #08090b;
-    --bg2: #0d0f12;
-    --panel: rgba(20, 22, 27, .72);
-    --panel-solid: #15171c;
     --text: #f5f5f7;
     --muted: #969aa5;
-    --soft: #c8cbd2;
-    --line: rgba(255,255,255,.09);
-    --line-strong: rgba(255,255,255,.14);
     --accent: #ff9fbd;
-    --accent-soft: rgba(255,159,189,.14);
-    --radius: 22px;
 }
 
 html {
@@ -74,12 +66,19 @@ a {
     inset: 0;
     z-index: 99999;
     overflow: hidden;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background:
-        radial-gradient(circle at 50% 42%, rgba(255,159,189,.085), transparent 30%),
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(255,159,189,.085),
+            transparent 30%
+        ),
         #07080a;
+
     transition:
         opacity .75s ease,
         visibility .75s ease;
@@ -94,58 +93,101 @@ a {
 .intro-grid {
     position: absolute;
     inset: -30%;
+
     opacity: .14;
+
     background-image:
-        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.055) 1px,
+            transparent 1px
+        );
+
     background-size: 52px 52px;
-    transform: perspective(600px) rotateX(58deg) translateY(12%);
+
+    transform:
+        perspective(600px)
+        rotateX(58deg)
+        translateY(12%);
+
     animation: introGrid 10s linear infinite;
 }
 
 @keyframes introGrid {
     from {
-        transform: perspective(600px) rotateX(58deg) translateY(12%);
+        transform:
+            perspective(600px)
+            rotateX(58deg)
+            translateY(12%);
     }
+
     to {
-        transform: perspective(600px) rotateX(58deg) translateY(64px);
+        transform:
+            perspective(600px)
+            rotateX(58deg)
+            translateY(64px);
     }
 }
 
 .intro-content {
     position: relative;
     z-index: 2;
+
     width: min(440px, calc(100% - 48px));
+
     text-align: center;
-    animation: introContent .95s cubic-bezier(.2,.8,.2,1) both;
+
+    animation:
+        introContent
+        .95s
+        cubic-bezier(.2,.8,.2,1)
+        both;
 }
 
 @keyframes introContent {
     from {
         opacity: 0;
-        transform: translateY(20px) scale(.97);
+        transform:
+            translateY(20px)
+            scale(.97);
     }
+
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 .intro-wordmark {
     font-size: clamp(3rem, 14vw, 5rem);
     line-height: .9;
+
     font-weight: 800;
     letter-spacing: -.065em;
+
     color: #fff;
-    text-shadow: 0 0 35px rgba(255,159,189,.13);
+
+    text-shadow:
+        0 0 35px
+        rgba(255,159,189,.13);
 }
 
 .intro-subtitle {
     margin-top: 18px;
+
     color: var(--muted);
+
     font-size: .95rem;
     font-weight: 500;
+
     letter-spacing: .015em;
+
     min-height: 24px;
 }
 
@@ -163,33 +205,66 @@ a {
 .intro-loader {
     width: min(280px, 100%);
     height: 3px;
+
     margin: 28px auto 0;
+
     overflow: hidden;
+
     border-radius: 99px;
+
     background: rgba(255,255,255,.08);
 }
 
 .intro-progress {
     width: 0%;
     height: 100%;
+
     border-radius: inherit;
+
     background: var(--accent);
-    box-shadow: 0 0 18px rgba(255,159,189,.35);
-    animation: introProgress 2.15s cubic-bezier(.2,.7,.2,1) forwards;
+
+    box-shadow:
+        0 0 18px
+        rgba(255,159,189,.35);
+
+    animation:
+        introProgress
+        2.15s
+        cubic-bezier(.2,.7,.2,1)
+        forwards;
 }
 
 @keyframes introProgress {
-    0% { width: 0%; }
-    22% { width: 19%; }
-    45% { width: 43%; }
-    68% { width: 68%; }
-    86% { width: 87%; }
-    100% { width: 100%; }
+    0% {
+        width: 0%;
+    }
+
+    22% {
+        width: 19%;
+    }
+
+    45% {
+        width: 43%;
+    }
+
+    68% {
+        width: 68%;
+    }
+
+    86% {
+        width: 87%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 .intro-hint {
     margin-top: 15px;
+
     color: rgba(255,255,255,.3);
+
     font-size: .72rem;
     letter-spacing: .04em;
 }
@@ -198,31 +273,53 @@ a {
 .petal-layer {
     position: absolute;
     inset: 0;
+
     overflow: hidden;
+
     pointer-events: none;
 }
 
 .intro-petal {
     position: absolute;
     top: -30px;
+
     width: 9px;
     height: 13px;
+
     border-radius: 80% 20% 80% 20%;
+
     background: rgba(255,159,189,.55);
+
     filter: blur(.1px);
-    animation: introFall linear forwards;
+
+    animation:
+        introFall
+        linear
+        forwards;
 }
 
 @keyframes introFall {
     0% {
-        transform: translate3d(0,-30px,0) rotate(0deg);
+        transform:
+            translate3d(0,-30px,0)
+            rotate(0deg);
+
         opacity: 0;
     }
+
     12% {
         opacity: .7;
     }
+
     100% {
-        transform: translate3d(var(--drift),110vh,0) rotate(540deg);
+        transform:
+            translate3d(
+                var(--drift),
+                110vh,
+                0
+            )
+            rotate(540deg);
+
         opacity: 0;
     }
 }
@@ -233,10 +330,13 @@ a {
 
 .site-header {
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
+
     z-index: 500;
+
     padding:
         max(14px, env(safe-area-inset-top))
         18px
@@ -246,24 +346,50 @@ a {
 .header-inner {
     max-width: 1180px;
     height: 64px;
+
     margin: 0 auto;
     padding: 0 18px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    background: rgba(13,15,18,.66);
-    border: 1px solid rgba(255,255,255,.085);
+    /*
+       Neutral gray → black.
+       No pink here.
+    */
+    background:
+        linear-gradient(
+            115deg,
+            rgba(118,121,127,.48) 0%,
+            rgba(82,84,90,.42) 28%,
+            rgba(49,51,56,.48) 55%,
+            rgba(20,21,25,.68) 78%,
+            rgba(5,6,8,.88) 100%
+        );
+
+    border: none;
+
     border-radius: 18px;
 
-    backdrop-filter: blur(24px) saturate(135%);
-    -webkit-backdrop-filter: blur(24px) saturate(135%);
+    backdrop-filter:
+        blur(26px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(26px)
+        saturate(140%);
 
     box-shadow:
-        0 16px 50px rgba(0,0,0,.24),
-        inset 0 1px rgba(255,255,255,.025);
+        0 18px 55px rgba(0,0,0,.3),
+        inset 0 1px rgba(255,255,255,.035);
 
-    animation: headerIn .75s .1s cubic-bezier(.2,.8,.2,1) both;
+    animation:
+        headerIn
+        .75s
+        .1s
+        cubic-bezier(.2,.8,.2,1)
+        both;
 }
 
 @keyframes headerIn {
@@ -271,6 +397,7 @@ a {
         opacity: 0;
         transform: translateY(-14px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -278,9 +405,17 @@ a {
 }
 
 .wordmark {
+    border: 0;
+    background: transparent;
+
+    color: #fff;
+
     font-size: 1.25rem;
     font-weight: 800;
+
     letter-spacing: -.045em;
+
+    cursor: pointer;
 }
 
 .nav {
@@ -292,10 +427,15 @@ a {
 .nav-button {
     border: 0;
     background: transparent;
-    color: #aeb2bb;
+
+    color: #c0c2c9;
+
     padding: 9px 13px;
+
     border-radius: 11px;
+
     cursor: pointer;
+
     transition:
         color .2s ease,
         background .2s ease,
@@ -304,7 +444,9 @@ a {
 
 .nav-button:hover {
     color: #fff;
-    background: rgba(255,255,255,.06);
+
+    background:
+        rgba(255,255,255,.07);
 }
 
 .nav-button:active {
@@ -314,6 +456,7 @@ a {
 .nav-button.primary {
     color: #111;
     background: #fff;
+
     font-weight: 700;
 }
 
@@ -327,24 +470,38 @@ a {
 
 .page-container {
     position: relative;
+
     min-height: 100vh;
-    overflow: hidden;
+
+    /*
+       IMPORTANT:
+       Do not clip the TOS content.
+    */
+    overflow: visible;
 }
 
 .view {
-    min-height: 100vh;
     width: 100%;
+
     padding:
         calc(105px + env(safe-area-inset-top))
         20px
         calc(55px + env(safe-area-inset-bottom));
 }
 
+/* =========================
+   HOME
+========================= */
+
 #home-view {
     position: relative;
+
+    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     transition:
         opacity .55s ease,
         transform .55s cubic-bezier(.2,.8,.2,1),
@@ -352,36 +509,73 @@ a {
 }
 
 #home-view.hidden-view {
+    position: absolute;
+
+    inset: 0;
+
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
-    transform: translateX(-45px) scale(.985);
+
+    transform:
+        translateX(-45px)
+        scale(.985);
 }
 
+/* =========================
+   TOS
+========================= */
+
 #tos-view {
+    /*
+       Hidden TOS does not affect the page.
+    */
     position: absolute;
-    inset: 0;
+
+    left: 0;
+    right: 0;
+
     min-height: 100vh;
-    padding:
-        calc(105px + env(safe-area-inset-top))
-        20px
-        calc(55px + env(safe-area-inset-bottom));
 
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
+
     transform: translateX(55px);
+
     transition:
         opacity .55s ease,
         transform .55s cubic-bezier(.2,.8,.2,1),
         visibility 0s linear .55s;
 }
 
+/*
+   CRITICAL FIX:
+
+   Once TOS is active, it becomes relative
+   so its full height contributes to the document.
+   That allows normal body scrolling.
+*/
 #tos-view.active {
+    position: relative;
+
+    left: auto;
+    right: auto;
+
+    min-height: 100vh;
+
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
+
     transform: translateX(0);
+
     transition:
         opacity .55s ease,
         transform .55s cubic-bezier(.2,.8,.2,1),
@@ -389,13 +583,20 @@ a {
 }
 
 /* =========================
-   HOME
+   HOME CONTENT
 ========================= */
 
 .home-content {
     width: min(820px, 100%);
+
     text-align: center;
-    animation: homeIn .9s .3s cubic-bezier(.2,.8,.2,1) both;
+
+    animation:
+        homeIn
+        .9s
+        .3s
+        cubic-bezier(.2,.8,.2,1)
+        both;
 }
 
 @keyframes homeIn {
@@ -403,6 +604,7 @@ a {
         opacity: 0;
         transform: translateY(18px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -412,29 +614,36 @@ a {
 .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+
     padding: 7px 11px;
+
     border: 1px solid rgba(255,159,189,.16);
+
     border-radius: 999px;
-    background: rgba(255,159,189,.055);
+
+    background:
+        rgba(255,159,189,.055);
+
     color: #e7afc2;
+
     font-size: .76rem;
     font-weight: 600;
+
     margin-bottom: 23px;
 }
 
-.eyebrow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px rgba(255,159,189,.65);
-}
-
 .home-title {
-    font-size: clamp(3rem, 10vw, 6.4rem);
+    font-size:
+        clamp(
+            3rem,
+            10vw,
+            6.4rem
+        );
+
     line-height: .93;
+
     letter-spacing: -.07em;
+
     font-weight: 800;
 }
 
@@ -444,38 +653,64 @@ a {
 
 .home-description {
     max-width: 610px;
+
     margin: 26px auto 0;
+
     color: var(--muted);
-    font-size: clamp(1rem, 2.5vw, 1.12rem);
+
+    font-size:
+        clamp(
+            1rem,
+            2.5vw,
+            1.12rem
+        );
+
     line-height: 1.7;
 }
 
 .beta-card {
     width: min(570px, 100%);
+
     margin: 42px auto 0;
+
     padding: 8px;
+
     display: flex;
+
     gap: 8px;
 
-    background: rgba(255,255,255,.045);
-    border: 1px solid var(--line);
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
     border-radius: 17px;
 
     box-shadow:
         0 25px 80px rgba(0,0,0,.24),
         inset 0 1px rgba(255,255,255,.025);
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
 }
 
 .beta-card input {
     flex: 1;
+
     min-width: 0;
+
     border: 0;
     outline: 0;
+
     color: #fff;
+
     background: transparent;
+
     padding: 13px 14px;
 }
 
@@ -485,12 +720,19 @@ a {
 
 .beta-card button {
     border: 0;
+
     border-radius: 12px;
+
     padding: 0 19px;
+
     background: #fff;
+
     color: #101114;
+
     font-weight: 700;
+
     cursor: pointer;
+
     transition:
         transform .2s ease,
         background .2s ease;
@@ -506,25 +748,40 @@ a {
 
 .beta-status {
     min-height: 24px;
+
     margin-top: 13px;
+
     color: #9ea2ac;
+
     font-size: .82rem;
 }
 
 .feature-row {
     display: flex;
+
     justify-content: center;
+
     flex-wrap: wrap;
+
     gap: 9px;
+
     margin-top: 28px;
 }
 
 .feature {
     padding: 8px 12px;
-    border: 1px solid rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
     border-radius: 10px;
+
     color: #858995;
-    background: rgba(255,255,255,.025);
+
+    background:
+        rgba(255,255,255,.025);
+
     font-size: .75rem;
 }
 
@@ -534,35 +791,58 @@ a {
 
 .petal {
     position: absolute;
+
     top: -25px;
+
     width: 8px;
     height: 12px;
-    border-radius: 80% 20% 80% 20%;
-    background: rgba(255,159,189,.25);
-    animation: fall linear infinite;
+
+    border-radius:
+        80% 20% 80% 20%;
+
+    background:
+        rgba(255,159,189,.25);
+
+    animation:
+        fall
+        linear
+        infinite;
+
     pointer-events: none;
 }
 
 @keyframes fall {
+
     0% {
-        transform: translateY(-30px) translateX(0) rotate(0);
+        transform:
+            translateY(-30px)
+            translateX(0)
+            rotate(0);
+
         opacity: 0;
     }
+
     12% {
         opacity: .65;
     }
+
     100% {
-        transform: translateY(110vh) translateX(var(--drift)) rotate(540deg);
+        transform:
+            translateY(110vh)
+            translateX(var(--drift))
+            rotate(540deg);
+
         opacity: 0;
     }
 }
 
 /* =========================
-   TOS
+   TOS CONTENT
 ========================= */
 
 .tos-shell {
     width: min(920px, 100%);
+
     margin: 0 auto;
 }
 
@@ -572,15 +852,25 @@ a {
 
 .tos-back {
     display: inline-flex;
+
     align-items: center;
+
     gap: 7px;
+
     border: 0;
+
     background: transparent;
+
     color: #9b9fa8;
+
     padding: 8px 0;
+
     margin-bottom: 22px;
+
     cursor: pointer;
-    transition: color .2s ease;
+
+    transition:
+        color .2s ease;
 }
 
 .tos-back:hover {
@@ -588,32 +878,61 @@ a {
 }
 
 .tos-title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-size:
+        clamp(
+            2.5rem,
+            8vw,
+            4.5rem
+        );
+
     letter-spacing: -.065em;
+
     line-height: .95;
+
     font-weight: 800;
 }
 
 .tos-updated {
     margin-top: 13px;
+
     color: #777b85;
+
     font-size: .85rem;
 }
 
 .tos-intro {
     margin-top: 24px;
+
     color: #aeb2bb;
+
     line-height: 1.75;
+
     max-width: 760px;
 }
 
 .tos-card {
-    padding: clamp(22px, 4vw, 38px);
-    background: rgba(16,18,22,.72);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    padding:
+        clamp(
+            22px,
+            4vw,
+            38px
+        );
+
+    background:
+        rgba(16,18,22,.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius: 22px;
+
+    backdrop-filter:
+        blur(24px);
+
+    -webkit-backdrop-filter:
+        blur(24px);
+
     box-shadow:
         0 25px 90px rgba(0,0,0,.25),
         inset 0 1px rgba(255,255,255,.025);
@@ -621,7 +940,10 @@ a {
 
 .tos-section {
     padding: 25px 0;
-    border-bottom: 1px solid rgba(255,255,255,.065);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.065);
 }
 
 .tos-section:first-child {
@@ -630,39 +952,57 @@ a {
 
 .tos-section:last-child {
     padding-bottom: 0;
+
     border-bottom: 0;
 }
 
 .tos-section h2 {
     font-size: 1.15rem;
+
     margin-bottom: 11px;
+
     color: #f2f2f4;
 }
 
 .tos-section p {
     color: #9da1aa;
+
     line-height: 1.75;
+
     font-size: .94rem;
 }
 
 .tos-section ul {
-    margin: 12px 0 0 20px;
+    margin:
+        12px 0 0 20px;
+
     color: #9da1aa;
 }
 
 .tos-section li {
     margin: 7px 0;
+
     line-height: 1.65;
 }
 
 .tos-highlight {
     margin-top: 14px;
+
     padding: 14px 16px;
+
     border-radius: 13px;
-    background: rgba(255,159,189,.055);
-    border: 1px solid rgba(255,159,189,.11);
+
+    background:
+        rgba(255,159,189,.055);
+
+    border:
+        1px solid
+        rgba(255,159,189,.11);
+
     color: #c5aab3;
+
     line-height: 1.65;
+
     font-size: .9rem;
 }
 
@@ -672,36 +1012,61 @@ a {
 
 .toast {
     position: fixed;
+
     left: 50%;
-    bottom: calc(22px + env(safe-area-inset-bottom));
+
+    bottom:
+        calc(
+            22px +
+            env(safe-area-inset-bottom)
+        );
+
     z-index: 1000;
-    transform: translate(-50%, 20px);
+
+    transform:
+        translate(-50%, 20px);
+
     opacity: 0;
+
     pointer-events: none;
 
     padding: 12px 16px;
-    border: 1px solid var(--line);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
     border-radius: 13px;
-    background: rgba(22,24,29,.9);
+
+    background:
+        rgba(22,24,29,.9);
+
     color: #dfe1e5;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
 
     transition: .3s ease;
+
     white-space: nowrap;
 }
 
 .toast.show {
     opacity: 1;
-    transform: translate(-50%, 0);
+
+    transform:
+        translate(-50%, 0);
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media (max-width: 600px) {
+
     .site-header {
         padding-left: 10px;
         padding-right: 10px;
@@ -709,7 +1074,9 @@ a {
 
     .header-inner {
         height: 58px;
+
         padding: 0 12px;
+
         border-radius: 16px;
     }
 
@@ -719,6 +1086,7 @@ a {
 
     .nav-button {
         padding: 8px 9px;
+
         font-size: .82rem;
     }
 
@@ -727,14 +1095,14 @@ a {
         padding-right: 11px;
     }
 
-    .view,
-    #tos-view {
+    .view {
         padding-left: 14px;
         padding-right: 14px;
     }
 
     .beta-card {
         flex-direction: column;
+
         padding: 7px;
     }
 
@@ -752,13 +1120,21 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+
+        scroll-behavior:
+            auto !important;
     }
 }
 </style>
@@ -770,23 +1146,47 @@ a {
      INTRO
 ========================= -->
 
-<div id="sakura-intro" class="sakura-intro">
+<div
+    id="sakura-intro"
+    class="sakura-intro"
+>
+
     <div class="intro-grid"></div>
-    <div class="intro-petals" id="intro-petals"></div>
+
+    <div
+        class="intro-petals"
+        id="intro-petals"
+    ></div>
 
     <div class="intro-content">
-        <div class="intro-wordmark">Sakura</div>
+
+        <div class="intro-wordmark">
+            Sakura
+        </div>
 
         <div class="intro-subtitle">
-            <span class="intro-status" id="intro-status">Connecting...</span>
+
+            <span
+                class="intro-status"
+                id="intro-status"
+            >
+                Connecting...
+            </span>
+
         </div>
 
         <div class="intro-loader">
+
             <div class="intro-progress"></div>
+
         </div>
 
-        <div class="intro-hint">Preparing your space</div>
+        <div class="intro-hint">
+            Preparing your space
+        </div>
+
     </div>
+
 </div>
 
 <!-- =========================
@@ -794,24 +1194,48 @@ a {
 ========================= -->
 
 <header class="site-header">
+
     <div class="header-inner">
-        <button class="wordmark" id="brand-button" aria-label="Go home">
+
+        <button
+            class="wordmark"
+            id="brand-button"
+            aria-label="Go home"
+        >
             Sakura
         </button>
 
         <nav class="nav">
-            <button class="nav-button" id="tos-button">TOS</button>
-            <button class="nav-button">Login</button>
-            <button class="nav-button primary">Register</button>
+
+            <button
+                class="nav-button"
+                id="tos-button"
+            >
+                TOS
+            </button>
+
+            <button class="nav-button">
+                Login
+            </button>
+
+            <button class="nav-button primary">
+                Register
+            </button>
+
         </nav>
+
     </div>
+
 </header>
 
 <!-- =========================
      PETALS
 ========================= -->
 
-<div class="petal-layer" id="petals"></div>
+<div
+    class="petal-layer"
+    id="petals"
+></div>
 
 <!-- =========================
      PAGE
@@ -821,11 +1245,14 @@ a {
 
     <!-- HOME -->
 
-    <section id="home-view" class="view">
+    <section
+        id="home-view"
+        class="view"
+    >
+
         <div class="home-content">
 
             <div class="eyebrow">
-                <span class="eyebrow-dot"></span>
                 Sakura Beta
             </div>
 
@@ -839,7 +1266,11 @@ a {
                 noise, and endless engagement tricks.
             </p>
 
-            <form class="beta-card" id="beta-form">
+            <form
+                class="beta-card"
+                id="beta-form"
+            >
+
                 <input
                     id="beta-email"
                     type="email"
@@ -851,32 +1282,56 @@ a {
                 <button type="submit">
                     Join beta
                 </button>
+
             </form>
 
-            <div class="beta-status" id="beta-status"></div>
+            <div
+                class="beta-status"
+                id="beta-status"
+            ></div>
 
             <div class="feature-row">
-                <div class="feature">Privacy-focused</div>
-                <div class="feature">No unnecessary tracking</div>
-                <div class="feature">Built with people</div>
+
+                <div class="feature">
+                    Privacy-focused
+                </div>
+
+                <div class="feature">
+                    No unnecessary tracking
+                </div>
+
+                <div class="feature">
+                    Built with people
+                </div>
+
             </div>
 
         </div>
+
     </section>
 
     <!-- TOS -->
 
-    <section id="tos-view" class="view" aria-hidden="true">
+    <section
+        id="tos-view"
+        class="view"
+        aria-hidden="true"
+    >
 
         <div class="tos-shell">
 
             <div class="tos-top">
 
-                <button class="tos-back" id="tos-back">
+                <button
+                    class="tos-back"
+                    id="tos-back"
+                >
                     ← Back to Sakura
                 </button>
 
-                <h1 class="tos-title">Terms of Service</h1>
+                <h1 class="tos-title">
+                    Terms of Service
+                </h1>
 
                 <p class="tos-updated">
                     Last updated: September 24, 2026
@@ -893,16 +1348,25 @@ a {
             <div class="tos-card">
 
                 <section class="tos-section">
-                    <h2>1. Acceptance of the Terms</h2>
+
+                    <h2>
+                        1. Acceptance of the Terms
+                    </h2>
+
                     <p>
                         By accessing or using Sakura, you agree to these Terms
                         of Service and any policies referenced by them. If you
                         do not agree with these terms, you should not use Sakura.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>2. Eligibility</h2>
+
+                    <h2>
+                        2. Eligibility
+                    </h2>
+
                     <p>
                         You must be at least 13 years old, or the minimum age
                         required to independently consent to digital services
@@ -915,10 +1379,15 @@ a {
                         identity documents or biometric information from the
                         verification process.
                     </div>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>3. Your Account</h2>
+
+                    <h2>
+                        3. Your Account
+                    </h2>
+
                     <p>
                         You are responsible for keeping your account credentials
                         secure and for activity performed through your account.
@@ -926,27 +1395,57 @@ a {
                         account and must not intentionally impersonate another
                         person.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>4. Prohibited Conduct</h2>
+
+                    <h2>
+                        4. Prohibited Conduct
+                    </h2>
+
                     <p>
                         You may not use Sakura to:
                     </p>
 
                     <ul>
-                        <li>Harass, threaten, or intentionally intimidate others.</li>
-                        <li>Distribute illegal content or facilitate illegal activity.</li>
-                        <li>Attempt to compromise Sakura or another user's account.</li>
-                        <li>Distribute malware, destructive code, or malicious links.</li>
-                        <li>Conduct scams, phishing, fraud, or impersonation intended to deceive.</li>
-                        <li>Use Sakura to exploit or endanger minors.</li>
-                        <li>Evade enforcement actions through repeated account creation.</li>
+                        <li>
+                            Harass, threaten, or intentionally intimidate others.
+                        </li>
+
+                        <li>
+                            Distribute illegal content or facilitate illegal activity.
+                        </li>
+
+                        <li>
+                            Attempt to compromise Sakura or another user's account.
+                        </li>
+
+                        <li>
+                            Distribute malware, destructive code, or malicious links.
+                        </li>
+
+                        <li>
+                            Conduct scams, phishing, fraud, or impersonation intended to deceive.
+                        </li>
+
+                        <li>
+                            Use Sakura to exploit or endanger minors.
+                        </li>
+
+                        <li>
+                            Evade enforcement actions through repeated account creation.
+                        </li>
                     </ul>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>5. Content</h2>
+
+                    <h2>
+                        5. Content
+                    </h2>
+
                     <p>
                         You retain ownership of content you create and upload.
                         By posting content to Sakura, you grant Sakura the
@@ -959,10 +1458,15 @@ a {
                         Sakura does not claim ownership of your content merely
                         because you post it on the platform.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>6. Message Privacy</h2>
+
+                    <h2>
+                        6. Message Privacy
+                    </h2>
+
                     <p>
                         Sakura is designed so that private messages and normal
                         conversations are not routinely reviewed by Sakura
@@ -980,10 +1484,15 @@ a {
                         This means Sakura does not operate by continuously
                         reading everyone's conversations.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>7. Voice and Video Calls</h2>
+
+                    <h2>
+                        7. Voice and Video Calls
+                    </h2>
+
                     <p>
                         Sakura does not intentionally record or permanently
                         store private voice or video calls for routine
@@ -995,10 +1504,15 @@ a {
                         a call may still be processed by the systems that make
                         the call possible.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>8. Reports</h2>
+
+                    <h2>
+                        8. Reports
+                    </h2>
+
                     <p>
                         Users may report content or accounts that they believe
                         violate these terms. Reports should be made honestly
@@ -1009,20 +1523,30 @@ a {
                         Sakura may review the relevant limited context needed
                         to investigate a report.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>9. Moderation</h2>
+
+                    <h2>
+                        9. Moderation
+                    </h2>
+
                     <p>
                         Sakura may restrict, remove, suspend, or terminate
                         accounts or content when reasonably necessary to
                         enforce these terms, protect users, comply with law,
                         or protect the service.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>10. Age Enforcement</h2>
+
+                    <h2>
+                        10. Age Enforcement
+                    </h2>
+
                     <p>
                         If Sakura reasonably determines that an account belongs
                         to someone below the minimum required age, the account
@@ -1034,10 +1558,15 @@ a {
                         suspension through an appropriate verification process,
                         including Yoti where available.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>11. Privacy</h2>
+
+                    <h2>
+                        11. Privacy
+                    </h2>
+
                     <p>
                         Sakura aims to collect only information reasonably
                         necessary to operate, secure, improve, and support the
@@ -1048,58 +1577,88 @@ a {
                         Information collected through Sakura should be handled
                         according to the Sakura Privacy Policy.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>12. Security</h2>
+
+                    <h2>
+                        12. Security
+                    </h2>
+
                     <p>
                         You must not attempt to bypass authentication,
                         compromise infrastructure, access another user's
                         account, or interfere with Sakura's availability.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>13. Third-Party Services</h2>
+
+                    <h2>
+                        13. Third-Party Services
+                    </h2>
+
                     <p>
                         Sakura may rely on third-party infrastructure and
                         services to provide functionality such as
                         authentication, hosting, databases, age verification,
                         notifications, analytics, or email delivery.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>14. Availability</h2>
+
+                    <h2>
+                        14. Availability
+                    </h2>
+
                     <p>
                         Sakura may experience downtime, maintenance,
                         interruptions, bugs, or feature changes. Sakura does
                         not guarantee that the service will always be available
                         or error-free.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>15. Changes to Sakura</h2>
+
+                    <h2>
+                        15. Changes to Sakura
+                    </h2>
+
                     <p>
                         Sakura may change, add, remove, or discontinue features
                         as development continues. Material changes to these
                         terms may be communicated through appropriate channels.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>16. Account Termination</h2>
+
+                    <h2>
+                        16. Account Termination
+                    </h2>
+
                     <p>
                         You may stop using Sakura at any time. Sakura may also
                         suspend or terminate accounts when required by these
                         terms, applicable law, or legitimate safety and security
                         needs.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>17. Disclaimer</h2>
+
+                    <h2>
+                        17. Disclaimer
+                    </h2>
+
                     <p>
                         Sakura is provided on an as-available basis. To the
                         extent permitted by applicable law, Sakura is not
@@ -1107,24 +1666,35 @@ a {
                         user-generated content, unauthorized account access,
                         or events outside Sakura's reasonable control.
                     </p>
+
                 </section>
 
                 <section class="tos-section">
-                    <h2>18. Contact</h2>
+
+                    <h2>
+                        18. Contact
+                    </h2>
+
                     <p>
                         Questions regarding these Terms of Service, privacy,
                         moderation, or account issues may be directed to the
                         official Sakura support channels.
                     </p>
+
                 </section>
 
             </div>
+
         </div>
+
     </section>
 
 </main>
 
-<div class="toast" id="toast"></div>
+<div
+    class="toast"
+    id="toast"
+></div>
 
 <script type="module">
 
@@ -1150,55 +1720,134 @@ const firebaseConfig = {
 let db = null;
 
 try {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
+
+    const app =
+        initializeApp(firebaseConfig);
+
+    db =
+        getFirestore(app);
+
 } catch (error) {
-    console.error("Firebase initialization failed:", error);
+
+    console.error(
+        "Firebase initialization failed:",
+        error
+    );
 }
 
 /* =========================
    ELEMENTS
 ========================= */
 
-const intro = document.getElementById("sakura-intro");
-const introStatus = document.getElementById("intro-status");
-const introPetals = document.getElementById("intro-petals");
+const intro =
+    document.getElementById(
+        "sakura-intro"
+    );
 
-const homeView = document.getElementById("home-view");
-const tosView = document.getElementById("tos-view");
+const introStatus =
+    document.getElementById(
+        "intro-status"
+    );
 
-const tosButton = document.getElementById("tos-button");
-const tosBack = document.getElementById("tos-back");
-const brandButton = document.getElementById("brand-button");
+const introPetals =
+    document.getElementById(
+        "intro-petals"
+    );
 
-const betaForm = document.getElementById("beta-form");
-const betaEmail = document.getElementById("beta-email");
-const betaStatus = document.getElementById("beta-status");
+const homeView =
+    document.getElementById(
+        "home-view"
+    );
 
-const toast = document.getElementById("toast");
+const tosView =
+    document.getElementById(
+        "tos-view"
+    );
+
+const tosButton =
+    document.getElementById(
+        "tos-button"
+    );
+
+const tosBack =
+    document.getElementById(
+        "tos-back"
+    );
+
+const brandButton =
+    document.getElementById(
+        "brand-button"
+    );
+
+const betaForm =
+    document.getElementById(
+        "beta-form"
+    );
+
+const betaEmail =
+    document.getElementById(
+        "beta-email"
+    );
+
+const betaStatus =
+    document.getElementById(
+        "beta-status"
+    );
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
 
 /* =========================
    INTRO PETALS
 ========================= */
 
 function createIntroPetal() {
-    const petal = document.createElement("span");
 
-    petal.className = "intro-petal";
+    const petal =
+        document.createElement(
+            "span"
+        );
 
-    const size = 5 + Math.random() * 7;
-    const duration = 4 + Math.random() * 5;
-    const delay = Math.random() * 2;
-    const drift = `${-100 + Math.random() * 200}px`;
+    petal.className =
+        "intro-petal";
 
-    petal.style.left = `${Math.random() * 100}%`;
-    petal.style.width = `${size}px`;
-    petal.style.height = `${size * 1.35}px`;
-    petal.style.animationDuration = `${duration}s`;
-    petal.style.animationDelay = `${delay}s`;
-    petal.style.setProperty("--drift", drift);
+    const size =
+        5 + Math.random() * 7;
 
-    introPetals.appendChild(petal);
+    const duration =
+        4 + Math.random() * 5;
+
+    const delay =
+        Math.random() * 2;
+
+    const drift =
+        `${-100 + Math.random() * 200}px`;
+
+    petal.style.left =
+        `${Math.random() * 100}%`;
+
+    petal.style.width =
+        `${size}px`;
+
+    petal.style.height =
+        `${size * 1.35}px`;
+
+    petal.style.animationDuration =
+        `${duration}s`;
+
+    petal.style.animationDelay =
+        `${delay}s`;
+
+    petal.style.setProperty(
+        "--drift",
+        drift
+    );
+
+    introPetals.appendChild(
+        petal
+    );
 
     setTimeout(() => {
         petal.remove();
@@ -1222,23 +1871,31 @@ const introMessages = [
 
 let introMessageIndex = 0;
 
-const statusInterval = setInterval(() => {
+const statusInterval =
+    setInterval(() => {
 
-    introStatus.classList.add("change");
+        introStatus.classList.add(
+            "change"
+        );
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-        introMessageIndex =
-            (introMessageIndex + 1) % introMessages.length;
+            introMessageIndex =
+                (introMessageIndex + 1)
+                % introMessages.length;
 
-        introStatus.textContent =
-            introMessages[introMessageIndex];
+            introStatus.textContent =
+                introMessages[
+                    introMessageIndex
+                ];
 
-        introStatus.classList.remove("change");
+            introStatus.classList.remove(
+                "change"
+            );
 
-    }, 180);
+        }, 180);
 
-}, 520);
+    }, 520);
 
 /* =========================
    INTRO END
@@ -1246,41 +1903,85 @@ const statusInterval = setInterval(() => {
 
 setTimeout(() => {
 
-    clearInterval(statusInterval);
+    clearInterval(
+        statusInterval
+    );
 
-    introStatus.textContent = "Welcome to Sakura";
+    introStatus.textContent =
+        "Welcome to Sakura";
 
     setTimeout(() => {
-        intro.classList.add("hidden");
+
+        intro.classList.add(
+            "hidden"
+        );
+
     }, 350);
 
 }, 2450);
 
 /* =========================
-   PAGE ROUTING
+   ROUTING
 ========================= */
 
 function showHome(push = true) {
 
-    homeView.classList.remove("hidden-view");
+    homeView.classList.remove(
+        "hidden-view"
+    );
 
-    tosView.classList.remove("active");
-    tosView.setAttribute("aria-hidden", "true");
+    tosView.classList.remove(
+        "active"
+    );
 
-    if (push && window.location.hash !== "#home") {
-        history.pushState(null, "", "#home");
+    tosView.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    if (
+        push &&
+        window.location.hash !== "#home"
+    ) {
+
+        history.pushState(
+            null,
+            "",
+            "#home"
+        );
     }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 function showTOS(push = true) {
 
-    homeView.classList.add("hidden-view");
+    homeView.classList.add(
+        "hidden-view"
+    );
 
-    tosView.classList.add("active");
-    tosView.setAttribute("aria-hidden", "false");
+    tosView.classList.add(
+        "active"
+    );
 
-    if (push && window.location.hash !== "#terms") {
-        history.pushState(null, "", "#terms");
+    tosView.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    if (
+        push &&
+        window.location.hash !== "#terms"
+    ) {
+
+        history.pushState(
+            null,
+            "",
+            "#terms"
+        );
     }
 
     window.scrollTo({
@@ -1291,15 +1992,19 @@ function showTOS(push = true) {
 
 function renderRoute() {
 
-    const hash = window.location.hash.toLowerCase();
+    const hash =
+        window.location.hash.toLowerCase();
 
     if (
         hash === "#terms" ||
         hash === "#tos" ||
         hash === "#terms-of-service"
     ) {
+
         showTOS(false);
+
     } else {
+
         showHome(false);
     }
 }
@@ -1311,8 +2016,11 @@ function navigateTo(hash) {
         hash === "#tos" ||
         hash === "#terms-of-service"
     ) {
+
         showTOS(true);
+
     } else {
+
         showHome(true);
     }
 }
@@ -1321,71 +2029,115 @@ function navigateTo(hash) {
    NAVIGATION
 ========================= */
 
-tosButton.addEventListener("click", () => {
-    navigateTo("#terms");
-});
+tosButton.addEventListener(
+    "click",
+    () => {
+        navigateTo("#terms");
+    }
+);
 
-tosBack.addEventListener("click", () => {
-    navigateTo("#home");
-});
+tosBack.addEventListener(
+    "click",
+    () => {
+        navigateTo("#home");
+    }
+);
 
-brandButton.addEventListener("click", () => {
-    navigateTo("#home");
-});
+brandButton.addEventListener(
+    "click",
+    () => {
+        navigateTo("#home");
+    }
+);
 
-window.addEventListener("popstate", renderRoute);
-window.addEventListener("hashchange", renderRoute);
+window.addEventListener(
+    "popstate",
+    renderRoute
+);
+
+window.addEventListener(
+    "hashchange",
+    renderRoute
+);
 
 /* =========================
    BETA WAITLIST
 ========================= */
 
-betaForm.addEventListener("submit", async (event) => {
+betaForm.addEventListener(
+    "submit",
+    async (event) => {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    const email = betaEmail.value.trim();
+        const email =
+            betaEmail.value.trim();
 
-    if (!email) {
-        return;
-    }
-
-    betaStatus.textContent = "Joining the beta...";
-    betaForm.querySelector("button").disabled = true;
-
-    try {
-
-        if (!db) {
-            throw new Error("Firebase is not initialized.");
+        if (!email) {
+            return;
         }
 
-        await addDoc(collection(db, "betaWaitlist"), {
-            email,
-            createdAt: serverTimestamp(),
-            source: "sakura-web"
-        });
-
-        betaEmail.value = "";
-
         betaStatus.textContent =
-            "You're on the list. We'll let you know when Sakura is ready.";
+            "Joining the beta...";
 
-        showToast("You're on the Sakura beta list.");
+        betaForm
+            .querySelector("button")
+            .disabled = true;
 
-    } catch (error) {
+        try {
 
-        console.error(error);
+            if (!db) {
 
-        betaStatus.textContent =
-            "Something went wrong. Please try again.";
+                throw new Error(
+                    "Firebase is not initialized."
+                );
+            }
 
-        showToast("Couldn't join the beta.");
+            await addDoc(
+                collection(
+                    db,
+                    "betaWaitlist"
+                ),
+                {
+                    email,
+                    createdAt:
+                        serverTimestamp(),
 
-    } finally {
+                    source:
+                        "sakura-web"
+                }
+            );
 
-        betaForm.querySelector("button").disabled = false;
+            betaEmail.value = "";
+
+            betaStatus.textContent =
+                "You're on the list. We'll let you know when Sakura is ready.";
+
+            showToast(
+                "You're on the Sakura beta list."
+            );
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+            betaStatus.textContent =
+                "Something went wrong. Please try again.";
+
+            showToast(
+                "Couldn't join the beta."
+            );
+
+        } finally {
+
+            betaForm
+                .querySelector("button")
+                .disabled = false;
+        }
     }
-});
+);
 
 /* =========================
    TOAST
@@ -1395,41 +2147,81 @@ let toastTimeout;
 
 function showToast(message) {
 
-    toast.textContent = message;
-    toast.classList.add("show");
+    toast.textContent =
+        message;
 
-    clearTimeout(toastTimeout);
+    toast.classList.add(
+        "show"
+    );
 
-    toastTimeout = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2800);
+    clearTimeout(
+        toastTimeout
+    );
+
+    toastTimeout =
+        setTimeout(() => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 2800);
 }
 
 /* =========================
    BACKGROUND PETALS
 ========================= */
 
-const petals = document.getElementById("petals");
+const petals =
+    document.getElementById(
+        "petals"
+    );
 
 function createPetal() {
 
-    const petal = document.createElement("span");
+    const petal =
+        document.createElement(
+            "span"
+        );
 
-    petal.className = "petal";
+    petal.className =
+        "petal";
 
-    const size = 5 + Math.random() * 6;
-    const duration = 7 + Math.random() * 8;
-    const delay = Math.random() * 8;
-    const drift = `${-120 + Math.random() * 240}px`;
+    const size =
+        5 + Math.random() * 6;
 
-    petal.style.left = `${Math.random() * 100}%`;
-    petal.style.width = `${size}px`;
-    petal.style.height = `${size * 1.35}px`;
-    petal.style.animationDuration = `${duration}s`;
-    petal.style.animationDelay = `${delay}s`;
-    petal.style.setProperty("--drift", drift);
+    const duration =
+        7 + Math.random() * 8;
 
-    petals.appendChild(petal);
+    const delay =
+        Math.random() * 8;
+
+    const drift =
+        `${-120 + Math.random() * 240}px`;
+
+    petal.style.left =
+        `${Math.random() * 100}%`;
+
+    petal.style.width =
+        `${size}px`;
+
+    petal.style.height =
+        `${size * 1.35}px`;
+
+    petal.style.animationDuration =
+        `${duration}s`;
+
+    petal.style.animationDelay =
+        `${delay}s`;
+
+    petal.style.setProperty(
+        "--drift",
+        drift
+    );
+
+    petals.appendChild(
+        petal
+    );
 
     setTimeout(() => {
         petal.remove();
@@ -1440,7 +2232,10 @@ for (let i = 0; i < 24; i++) {
     createPetal();
 }
 
-setInterval(createPetal, 700);
+setInterval(
+    createPetal,
+    700
+);
 
 /* =========================
    INITIAL ROUTE
